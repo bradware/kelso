@@ -6,7 +6,6 @@
   ],
   "description": "Kelso web app for Kenzie Lane",
   "main": "index.html",
-  "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
