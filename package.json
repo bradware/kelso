@@ -7,7 +7,6 @@
     "test": "npm test"
   },
   "author": "Brad Ware",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.1",
     "body-parser": "^1.15.2",
