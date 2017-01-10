@@ -25,10 +25,7 @@ router.post('/register', function(req, res, next) {
 		} else {
 			req.session.viewerID = newViewer._id;
 			req.session.viewerEmail = newViewer.email;
-			res.status(201);
-			res.json({
-				viewer: newViewer
-			});
+			res.send({redirect: '/signup-content.html'});
 		}
 	});
 });

@@ -17,6 +17,7 @@ var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
 var logoutRoute = require('routes/logout');
 var viewerRoute = require('routes/viewer');
+var contentRoute = require('routes/content');
 
 // Constants
 var port = process.env.PORT || 3001;
@@ -64,6 +65,7 @@ app.use(route_prefix, registerRoute);
 app.use(route_prefix, loginRoute);
 app.use(route_prefix, logoutRoute);
 app.use(route_prefix, viewerRoute);
+app.use(route_prefix, contentRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

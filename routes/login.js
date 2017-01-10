@@ -18,7 +18,7 @@ router.use('/login', middleware.isLoggedOut, function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-	Viewer.authenticate(req.body.email, req.body.password, function(error, viewer) {
+	Viewer.authenticate(req.body.email, req.body.password, function(error, newViewer) {
 		if (error) {
 			next(error);
 		} else {

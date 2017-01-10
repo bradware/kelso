@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- HEADER -->
+    <title>Kelso</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Media content, friends, family, TV, Movies, Netflix">
+    <meta name="description" content="Kelso is a tool for finding media content based on who you are watching with">
+    <meta name="author" content="Brad Ware">
+
+    <!-- CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/signup.css" rel="stylesheet">
+    <!-- END OF HEADER -->
+  </head>
+  <body class="container-fluid">
+    <main>
+      <div class="row text-center header">
+        <i class="fa fa-user-o fa-3x"></i>
+        <h2>I am...</h2>
+      </div>
+      <form class="text-center">
+        <div class="form-group">
+          <label for="first-name">First</label>
+          <input type="text" class="form-control" id="first-name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last</label>
+          <input type="text" class="form-control" id="last-name" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <label for="age">Age</label>
+            <input type="age" class="form-control" id="age" placeholder="Age" required>
+          </div>
+          <select class="form-group col-xs-6">
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="male" checked> Male
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="female"> Female
+            </label>
+          </select>
+        </div>
+        <button type="button" id="submit-btn" class="btn btn-primary btn-lg btn-block" disabled="disabled">Next</button>
+      </form>
+    </main>
+
+    <!-- JS -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/signup-viewer.js"></script>
+  </body>
+</html>

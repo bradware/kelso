@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- HEADER -->
+    <title>Kelso</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Media content, friends, family, TV, Movies, Netflix">
+    <meta name="description" content="Kelso is a tool for finding media content based on who you are watching with">
+    <meta name="author" content="Brad Ware">
+
+    <!-- CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/signup.css" rel="stylesheet">
+    <!-- END OF HEADER -->
+  </head>
+  <body class="container-fluid">
+    <main>
+      <div class="row text-center header">
+        <i class="fa fa-users fa-3x"></i>
+        <h2>I watch with...</h2>
+      </div>
+      <div class="text-center">
+        <button id="add-member"><i class="fa fa-plus-circle fa-2x">Add Member</i></button>
+        <div id="members">
+          <div class="form-group member">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" required>
+          </div>
+        </div>
+      </div>
+      <a href="/"><button type="submit" class="btn btn-primary btn-lg btn-block">Next</button></a>
+    </main>
+
+    <!-- JS -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/signup-group.js"></script>
+  </body>
+</html>

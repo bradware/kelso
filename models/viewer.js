@@ -10,6 +10,7 @@ var ViewerSchema = mongoose.Schema({
 	age: {type: Number},
 	gender: {type: String, enum: ['MALE', 'FEMALE']},
 	email: {type: String, required: true, unique: true, trim: true},
+	content: [{type: String}],
 	password: {type: String, required: true},
 	created_at: {type: Date, default: Date.now}
 });
@@ -27,7 +28,7 @@ ViewerSchema.statics.authenticate = function(email, password, callback) {
 			callback(err);
 		} else { 
 			// Found user so comparing password to hashed/salted version in Mongo
-			bcrypt.compare(password, user.password, function(error, result) {
+			bcrypt.compare(password, viewer.password, function(error, result) {
 				if (result) {
 					// Password matched, returning the user
 					return callback(null, viewer);

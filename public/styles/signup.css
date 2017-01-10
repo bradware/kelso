@@ -1,0 +1,20 @@
+.header {
+	padding: 10%;
+}
+
+.btn {
+	margin-top: 20px;
+}
+
+#members {
+	padding-top: 25px;
+}
+
+.tile {
+	border: 1px solid black;
+	height: 180px;
+}
+
+.tile-content {
+	margin-top: 75px;
+}
