@@ -1,0 +1,226 @@
+/*
+  Document styles
+*/
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 80px;  /* margin bottom should equal footer height */
+}
+h2 {
+  margin-top: 10px;
+}
+h3 {
+  font-size: 20px;
+  margin-top: 10px;
+}
+#top {
+  background-color: #435481;
+  border-bottom: 1px solid #DBDBDB;
+  color: white;
+}
+
+/* 
+  Title styles
+*/
+#title i { 
+  font-size: 16px;
+}
+
+/* 
+  Search Styles
+*/
+#top a {
+  color: white;
+}
+#search-component {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 10px 15px 10px 15px;
+}
+.search-main {
+  padding: 0px 5px 0px 5px;
+}
+.search-main-component {
+  padding: 5px 10px 5px 10px;
+}
+.search-extra {
+  padding: 5px 0px 5px 0px;
+}
+.search-extra-component {
+  padding: 0 10px 0 15px;
+}
+.form-control {
+  display: inline-block;
+  width: auto;
+}
+.checkbox-inline {
+  margin-left: 5px;
+  padding: 8px 0 8px 0;
+  width: 295px;
+}
+.checkbox-inline i {
+  margin-left: 2px;
+}
+.checkbox-inline label {
+  font-weight: normal;
+  margin-left: 25px;
+}
+.search-submit {
+  padding: 10px 0px 10px 0px;
+}
+.input-group-addon, .form-control {
+  color: #333333;
+}
+#more-options i {
+  margin-left: 5px;
+}
+#radius-filter {
+  min-width: 110px;
+}
+#tooltip {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #333333;
+  left: 220px;
+  padding: 5px;
+  position: absolute;
+  top: 35px;
+  width: 150px;
+  z-index: 10;
+}
+
+/*
+  Results styles
+*/
+#bottom a {
+  color: #333333;
+}
+#loading-component {
+  background: url('../images/loading.gif') no-repeat white;
+  height: 300px;
+  margin: 25px auto 25px auto;
+  width: 300px;
+}
+.sort-by-label {
+  display: inline-block;
+  font-size: 24px;
+  margin: 10px 10px 10px 0;
+}
+#sort-by {
+  font-size: 21px;
+  height: 45px;
+}
+.result-component-container {
+  margin: 0 auto;
+  max-width: 760px;
+}
+.result-component {
+  background-color: white;
+  border: 1px solid #EFEFEF;
+  border-radius: 3px;
+  margin: 15px;
+  padding: 10px;
+  width: 350px;
+}
+.result-component-lucky {
+  background-color: white;
+  border: 1px solid #EFEFEF;
+  margin: 15px auto 15px auto;
+  padding: 10px;
+  width: 350px;
+}
+.result-image {
+  box-shadow: 0px 0px 5px #C0C0C0;
+  -webkit-box-shadow: 0px 0px 5px #C0C0C0;
+  -moz-box-shadow: 0px 0px 5px #C0C0C0;
+  -ms-box-shadow: 0px 0px 5px #C0C0C0;
+  -o-box-shadow: 0px 0px 5px #C0C0C0;
+  height: 200px;
+  margin-bottom: 15px;
+  width: 200px;
+}
+#sorted-by-component {
+  padding-top: 15px;
+}
+#feeling-lucky-component h2 {
+  color: green;
+  margin-bottom: 0;
+}
+#no-results-component {
+  margin: 25px 0 25px 0;
+}
+.location-container {
+  margin: -3px 0 10px 0;
+}
+.location-container h3 {
+  margin: 3px 0 3px 0;
+}
+#bottom .action-link {
+  color: green;
+  margin-left: 15px;
+}
+
+/*
+	Footer Styles
+*/
+.panel-footer {
+  bottom: 0;
+  height: 80px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+.copyright {
+  margin: 10px 0;
+}
+.copyright a {
+  color: #435481;
+}
+
+/*
+  Mobile styles
+*/
+@media screen and (max-width: 992px) {
+  html, body {
+    overflow-x:hidden 
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .result-component {
+    margin: 15px auto 15px auto;
+  }
+  .result-component-container {
+    width: 350px;
+  }
+  #tooltip {
+    left: 140px;
+    top: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .checkbox-inline {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  #tooltip {
+    left: 200px;
+    top: 32px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #tooltip {
+    left: 145px;
+    top: 30px;
+  }
+  .result-component-container, .result-component-lucky {
+    margin: 5px -15px 5px -15px;
+  }
+}

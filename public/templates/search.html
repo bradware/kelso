@@ -1,0 +1,34 @@
+<div class="row search-main">
+  <div class="col-xs-12 col-sm-6 search-main-component">
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">I want ...</span>
+      <input type="text" class="form-control" id="term" placeholder="sushi, brunch, coffee, cheap food...">
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 search-main-component">
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">Around</span>
+      <input type="text" class="form-control" id="location" placeholder="address, city, state, zip, or neighborhood">
+    </div>
+  </div>
+</div>
+<div class="row text-center">
+  <a href="#" id="more-options">See more<i class="fa fa-caret-down"></i></a>
+</div>
+<div class="row search-extra">
+  <div class="col-xs-6 search-extra-component">
+    <div class="input-group input-group-md">
+      <span class="input-group-addon">Radius (mi.)</span>
+      <input type="text" class="form-control" id="radius-filter" placeholder="35 mile range">
+    </div>
+  </div>
+  <div class="col-xs-6 checkbox-inline">
+    <label><input type="checkbox" id="current-location">Use current location</label>
+    <label><input type="checkbox" id="feeling-lucky">I'm feeling lucky</label>
+    <div id="tooltip">Life is already tough, don't make it any harder on yourself.</div>
+    <i class="fa fa-info-circle" id="info"></i>
+  </div>
+</div>
+<div class="row search-submit text-center">
+  <button type="button" class="btn btn-default btn-lg" id="search-button" disabled="true">Search</button>
+</div>
