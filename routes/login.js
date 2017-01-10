@@ -22,8 +22,8 @@ router.post('/login', function(req, res, next) {
 		if (error) {
 			next(error);
 		} else {
-			// Password matched
-			req.session.viewerID = viewer.email;
+			req.session.viewerID = newViewer._id;
+			req.session.viewerEmail = newViewer.email;
 			res.status(200);
 			res.json({
 				viewer: viewer

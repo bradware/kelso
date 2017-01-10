@@ -16,6 +16,7 @@ var MongoStore = require('connect-mongo')(session);
 var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
 var logoutRoute = require('routes/logout');
+var viewerRoute = require('routes/viewer');
 
 // Constants
 var port = process.env.PORT || 3001;
@@ -58,10 +59,11 @@ if (app.get('env') === 'production') {
 }
 app.use(session(sess));
 
-// Connect all our routes with /api/v1
+// Connect all our routes with /api
 app.use(route_prefix, registerRoute);
 app.use(route_prefix, loginRoute);
 app.use(route_prefix, logoutRoute);
+app.use(route_prefix, viewerRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

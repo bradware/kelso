@@ -8,6 +8,7 @@ var ViewerSchema = mongoose.Schema({
 	first_name: {type: String, required: true, trim: true},
 	last_name: {type: String, required: true, trim: true},
 	age: {type: Number},
+	gender: {type: String, enum: ['MALE', 'FEMALE']},
 	email: {type: String, required: true, unique: true, trim: true},
 	password: {type: String, required: true},
 	created_at: {type: Date, default: Date.now}
