@@ -3,8 +3,7 @@
 // Wait until DOM loads
 $(document).ready(function() {
 	var submitBtn = $('#submit-btn');
-	var firstName = $('#first-name');
-	var lastName = $('#last-name');
+	var name = $('#name');
 	var email = $('#email');
 	var password = $('#password');
 	var age = $('#age');
@@ -12,7 +11,7 @@ $(document).ready(function() {
 	var male = $('#male');
 
 	$('input').keypress(function(e) {
-    if (firstName.val() && lastName.val() && email.val() && email.val().includes('@') 
+    if (name.val() && email.val() && email.val().includes('@') 
     	&& password.val() && handleAge(age.val())) {
        submitBtn.prop('disabled', false);
     } else {
@@ -22,8 +21,7 @@ $(document).ready(function() {
 
   submitBtn.click(function() {
   	var viewer = {};
-  	viewer.first_name = firstName.val().trim();
-  	viewer.last_name = lastName.val().trim();
+  	viewer.name = name.val().trim();
   	viewer.email = email.val().trim();
   	viewer.password = password.val().trim();
   	viewer.age = age.val().trim();

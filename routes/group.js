@@ -5,27 +5,33 @@ require('rootpath')();
 var express = require('express');
 var router = express.Router();
 var middleware = require('middleware');
-var Viewer = require('models/Viewer');
-var Group = require('models/Group');
+var Viewer = require('models/viewer');
+var Group = require('models/group');
+var Content = require('models/content');
 
 router.post('/group', middleware.isLoggedIn, function(req, res, next) {
-	Viewer.find({'email': { $in: req.body.emails}}, function(err, viewers) {
-    var set = new Set();
-    for (let i = 0; i < viewers.length; i++) {
-    	set.add(viewers[i]._id);
-    }
-    var arr = Array.from(set);
-    arr.push(req.session.viewerID);
+	Viewer.find({'name': { $in: req.body.names}}, function(err, viewers) {
 		var group = new Group();
-		group.name = 'Group';
-		group.viewers = arr;
-		group.save(function(err, newGroup) {
-			if (err) {
-				return next(err);
-			} else {
-				res.send({redirect: '/home.html'});
-			}
-		});
+		group.viewers.push(req.session.viewerID); // add viewer logged in to group
+		for (let i = 0; i < viewers.length; i++) {
+    	group.viewers.push(viewers[i]._id);
+    }
+
+    Content.findOne({'title': req.body.contentTitle}, function(err, content) {
+    	if (err) {
+    		next(err);
+    	} else {
+    		group.content = content._id;
+    		group.name = 'Group: ' + req.session.name + '|' + content.title;
+    		group.save(function(err, newGroup) {
+					if (err) {
+						return next(err);
+					} else {
+						res.json({msg: 'New Group was saved!'});
+					}
+				});
+    	}
+    });
 	});
 });
 

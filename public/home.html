@@ -14,23 +14,55 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
     <!-- END OF HEADER -->
   </head>
   <body class="container-fluid">
+    <!-- Header Inserted - NO PANEL HEADING ON INDEX -->
+    <header class="row"></header>
+    <!-- End of Header -->
     <main>
-      <!-- Title -->
-      <div class="row text-center title">
-        <i class="fa fa-step-backward fa-4x"></i>
-        <h1>Welcome Home.</h1>
+    	<div class="row text-center header">
+        <i class="fa fa-home fa-3x"></i>
+      	<h2>Home</h2>
       </div>
-      <div class="row text-center actions">
-      	<button type="button" id="submit-btn" class="btn btn-primary btn-lg btn-block">Logout</button>
-	    </div>
+      <div class="row">
+        <div class="col-xs-12 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
+          <div class="tile-content">
+            <h4>Watch</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
+          <div class="tile-content">
+            <h4>Explore</h4>
+          </div>
+        </div>
+        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
+          <div class="tile-content">
+            <h4>Popular</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
+          <div class="tile-content">
+            <h4>Profile</h4>
+          </div>
+        </div>
+        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
+          <div class="tile-content">
+            <h4>About</h4>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- JS -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/home.js"></script>
   </body>
 </html>

@@ -8,7 +8,7 @@ var middleware = require('middleware');
 var Viewer = require('models/Viewer');
 
 router.use('/register', function(req, res, next) {
-	if (req.body.first_name && req.body.last_name && req.body.age && req.body.gender && req.body.email && req.body.password) {
+	if (req.body.name && req.body.age && req.body.gender && req.body.email && req.body.password) {
 		next();
 	} else {
 		var err = new Error('All fields are required to register');
@@ -25,7 +25,8 @@ router.post('/register', function(req, res, next) {
 		} else {
 			req.session.viewerID = newViewer._id;
 			req.session.viewerEmail = newViewer.email;
-			res.send({redirect: '/signup-content.html'});
+			req.session.name = newViewer.name;
+			res.send({redirect: '/signup-group.html'});
 		}
 	});
 });

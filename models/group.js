@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var GroupSchema = mongoose.Schema({
 	name: {type: String, required: true, trim: true},
 	viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'}],
+	content: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
 	created_at: {type: Date, default: Date.now}
 });
 

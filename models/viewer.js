@@ -5,13 +5,12 @@ var bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
 
 var ViewerSchema = mongoose.Schema({
-	first_name: {type: String, required: true, trim: true},
-	last_name: {type: String, required: true, trim: true},
+	name: {type: String, required: true, trim: true},
 	age: {type: Number},
 	gender: {type: String, enum: ['MALE', 'FEMALE']},
 	email: {type: String, required: true, unique: true, trim: true},
-	content: [{type: String}],
-	password: {type: String, required: true},
+	other_viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'}],
+	password: {type: String},
 	created_at: {type: Date, default: Date.now}
 });
 
@@ -27,23 +26,21 @@ ViewerSchema.statics.authenticate = function(email, password, callback) {
 			err.status = 401;
 			callback(err);
 		} else { 
-			// Found user so comparing password to hashed/salted version in Mongo
-			bcrypt.compare(password, viewer.password, function(error, result) {
-				if (result) {
-					// Password matched, returning the user
-					return callback(null, viewer);
-				} else {
-					// Password did not match the email
-					var err = new Error('Wrong password');
-					err.status = 401;
-					return callback(err, null);
-				}
-			});
+			if (password === viewer.password) {
+				// Password matched, returning the user
+				return callback(null, viewer);
+			} else {
+				// Password did not match the email
+				var err = new Error('Wrong password');
+				err.status = 401;
+				return callback(err, null);
+			}
 		}
 	});
 }
 
 // Hash & Salt password, ssn4 before saving to Mongo
+/**
 ViewerSchema.pre('save', function(next) {
 	// Salts & hashes password
 	var viewer = this;
@@ -56,6 +53,7 @@ ViewerSchema.pre('save', function(next) {
 		}
 	});
 });
+*/
 
 var Viewer = mongoose.model('Viewer', ViewerSchema);
 module.exports = Viewer;

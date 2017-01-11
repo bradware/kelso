@@ -8,18 +8,17 @@ $(document).ready(function() {
   
 
   addMember.click(function() {
-  	var emptyEmail = checkEmails();
-  	if (!emptyEmail) {
+  	var emptyInput = checkInput();
+  	if (!emptyInput) {
   		var memberComponent = getMemberComponent();
   		members.prepend(memberComponent);
   	}
   });
 
   submitBtn.click(function() {
-  	var emails = grabEmails();
-  	var obj = {};
-  	obj.emails = emails;
-  	$.post('/api/group', obj)
+    var obj = {};
+    obj.viewers = grabInput();
+  	$.post('/api/viewer', obj)
   		.done(function(res) {
   			if (res.redirect) {
     			document.location.href = res.redirect;
@@ -31,8 +30,8 @@ $(document).ready(function() {
   });
 
   $('input').keypress(function(e) {
-    var emptyEmail = checkEmails();
-  	if (!emptyEmail) {
+    var emptyInput = checkInput();
+  	if (!emptyInput) {
   		submitBtn.prop('disabled', false);
   	} else {
   		submitBtn.prop('disabled', true);
@@ -42,30 +41,39 @@ $(document).ready(function() {
 
 function getMemberComponent() {
 	var content = 
-		'<div class="form-group member">' +
-			'<label for="email">Email</label>' +
-			'<input type="email" class="form-control" id="email" placeholder="Email">' + 
+		'<div class="member">' +
+      '<div class="form-group">' + 
+        '<label for="name">Name</label>' + 
+        '<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
+      '</div>' + 
+      '<div class="form-group">' + 
+        '<label for="name">Email</label>' + 
+        '<input type="email" class="form-control" id="email" placeholder="Email" required>' + 
+      '</div>' + 
 		'</div>';
 	return content;
 }
 
-function checkEmails() {
-	var emails = $('input');
-	var emptyEmail = false;
-	for (let i = 0; i < emails.length; i++) {
-		if (emails[i].value.length === 0) {
+function checkInput() {
+	var input = $('input');
+	var emptyInput = false;
+	for (let i = 0; i < input.length; i++) {
+		if (input[i].value.length === 0) {
 			return true;
 		}
 	}
 	return false;
 }
 
-function grabEmails() {
-	var emails = $('input');
-	var emailList = [];
-	for (let i = 0; i < emails.length; i++) {
-		emailList.push(emails[i].value);
-	}
+function grabInput() {
+  var fields = $('input').find().prevObject;
+  var arr = [];
+  for (let i = 0; i < fields.length - 1; i += 2) {
+    var obj = {};
+    obj.name = fields[i].value;
+    obj.email = fields[i+1].value;
+    arr.push(obj);
+  }
 
-	return emailList;
+  return arr;
 }
