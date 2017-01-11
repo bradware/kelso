@@ -14,13 +14,9 @@ $(document).ready(function() {
     } else {
       titles.add(contentTitle);
     }
-
-    console.log(titles);
-
   });
 
   submitBtn.click(function() {
-    console.log('in here');
     var obj = {};
     obj.contentTitles = [ ];
     for (let title of titles) {

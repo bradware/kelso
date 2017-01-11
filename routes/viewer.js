@@ -70,10 +70,7 @@ router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
     		if (err) {
 					next(err);
 				} else {
-					res.status(200);
-					res.json({
-						viewer
-					});
+					res.send({redirect: '/signup-group.html'});
 				}
   		});
 		}

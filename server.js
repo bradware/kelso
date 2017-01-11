@@ -18,6 +18,7 @@ var loginRoute = require('routes/login');
 var logoutRoute = require('routes/logout');
 var viewerRoute = require('routes/viewer');
 var contentRoute = require('routes/content');
+var groupRoute = require('routes/group');
 
 // Constants
 var port = process.env.PORT || 3001;
@@ -52,7 +53,7 @@ var sess = {
 	resave: true,
 	saveUninitialized: false,
 	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 900000} // 15 minute expiration for session
+	cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
@@ -66,6 +67,7 @@ app.use(route_prefix, loginRoute);
 app.use(route_prefix, logoutRoute);
 app.use(route_prefix, viewerRoute);
 app.use(route_prefix, contentRoute);
+app.use(route_prefix, groupRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

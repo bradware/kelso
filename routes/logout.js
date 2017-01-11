@@ -11,11 +11,7 @@ router.get('/logout', middleware.isLoggedIn, function(req, res, next) {
     if (err) {
     	return next(err);
   	} else {
-  		return res.json({
-  			success: {
-  				message: 'Viewer logged out'
-  			}
-  		});
+  		res.send({redirect: '/'});
   	}
 	});
 });

@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var GroupSchema = mongoose.Schema({
 	name: {type: String, required: true, trim: true},
-	viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer', required: true}],
+	viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'}],
 	created_at: {type: Date, default: Date.now}
 });
 

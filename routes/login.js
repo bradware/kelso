@@ -24,10 +24,7 @@ router.post('/login', function(req, res, next) {
 		} else {
 			req.session.viewerID = newViewer._id;
 			req.session.viewerEmail = newViewer.email;
-			res.status(200);
-			res.json({
-				viewer: viewer
-			});
+			res.send({redirect: '/home.html'});
 		}
 	});
 });
