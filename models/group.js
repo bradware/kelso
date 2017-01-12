@@ -4,8 +4,14 @@ var mongoose = require('mongoose');
 
 var GroupSchema = mongoose.Schema({
 	name: {type: String, required: true, trim: true},
-	viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'}],
-	content: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
+	viewers: [{
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'},
+		name: {type: String, trim: true}
+	}],
+	content: {
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
+		title: {type: String, trim: true}
+	},
 	created_at: {type: Date, default: Date.now}
 });
 

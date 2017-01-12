@@ -12,17 +12,26 @@ var Content = require('models/content');
 router.post('/group', middleware.isLoggedIn, function(req, res, next) {
 	Viewer.find({'name': { $in: req.body.names}}, function(err, viewers) {
 		var group = new Group();
-		group.viewers.push(req.session.viewerID); // add viewer logged in to group
+		var loggedInUser = {};
+		loggedInUser._id = req.session.viewerID;
+		loggedInUser.name = req.session.viewerName;
+  	group.viewers.push(loggedInUser);
 		for (let i = 0; i < viewers.length; i++) {
-    	group.viewers.push(viewers[i]._id);
+			var obj = {};
+			obj._id = viewers[i]._id;
+			obj.name = viewers[i].name;
+    	group.viewers.push(obj);
     }
 
     Content.findOne({'title': req.body.contentTitle}, function(err, content) {
     	if (err) {
     		next(err);
     	} else {
-    		group.content = content._id;
-    		group.name = 'Group: ' + req.session.name + '|' + content.title;
+    		var contentObj = {};
+    		contentObj._id = content._id;
+    		contentObj.title = content.title;
+    		group.content = contentObj;
+    		group.name = req.session.viewerName + '|' + content.title;
     		group.save(function(err, newGroup) {
 					if (err) {
 						return next(err);
@@ -35,48 +44,13 @@ router.post('/group', middleware.isLoggedIn, function(req, res, next) {
 	});
 });
 
-router.get('/group', middleware.isLoggedIn, function(req, res, next) {
-	Group.findById(req.session.groupID, function (err, group) {
+router.get('/groups', middleware.isLoggedIn, function(req, res, next) {
+	Group.find({'viewers._id': req.session.viewerID}, function(err, groups) {
 		if (err) {
 			next(err);
 		} else {
-			res.status(200);
 			res.json({
-				group
-			});
-		}
-	});
-});
-
-router.put('/group', middleware.isLoggedIn, function(req, res, next) {
-	Group.findById(req.session.groupID, function (err, group) {
-		if (err) {
-			next(err);
-		} else {
-			group.update(req.body, function (err, group) {
-    		if (err) {
-					next(err);
-				} else {
-					res.status(200);
-					res.json({
-						group
-					});
-				}
-  		});
-		}
-	});
-});
-
-router.delete('/group', middleware.isLoggedIn, function(req, res, next) {
-	Group.remove({_id: req.session.groupID}, function (err) {
-		if (err) {
-			next(err);
-		} else {
-			res.status(200);
-			res.json({
-				success: {
-					message: 'Group deleted'
-				}
+				groups
 			});
 		}
 	});

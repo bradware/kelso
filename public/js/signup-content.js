@@ -35,8 +35,23 @@ $(document).ready(function() {
       .fail(function(error) {
         console.log(error);
       });
+    clearCheckboxes();
   });
+
+  $('#cancel').click(function() {
+    clearCheckboxes();
+  });
+
 });
+
+function clearCheckboxes() {
+  var checkboxes = $('input:checkbox');
+  var names = [];
+  for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+  }
+}
+
 
 function getModal() {
   $.get('/api/viewer/content')

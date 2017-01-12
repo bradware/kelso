@@ -24,6 +24,7 @@ router.post('/login', function(req, res, next) {
 		} else {
 			req.session.viewerID = newViewer._id;
 			req.session.viewerEmail = newViewer.email;
+			req.session.viewerName = newViewer.name;
 			res.send({redirect: '/home.html'});
 		}
 	});
