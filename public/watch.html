@@ -25,9 +25,23 @@
     	<div class="row text-center header">
         <i class="fa fa-television fa-3x"></i>
       </div>
-      <div id="groups">
-
-      </div>      
+      <!-- Small modal -->
+      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="cancel" class="btn btn-default modal-btn" data-dismiss="modal">Cancel</button>
+              <button type="button" id="watch" class="btn btn-primary modal-btn" data-dismiss="modal">Watch</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center" id="names"></div>
+      <div id="groups"></div>      
     </main>
 
     <!-- JS -->

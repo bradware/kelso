@@ -11,6 +11,11 @@
 	margin: 20px 0 20px 0;
 }
 
+.btn .modal-btn {
+	font-size: 14px;
+	margin: auto;
+}
+
 .navbar-default .navbar-brand {
 	color: black;
 }

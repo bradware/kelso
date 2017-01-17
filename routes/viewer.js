@@ -46,47 +46,7 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 					}
 				});
 			});
-			res.send({redirect: '/signup-content.html'});
-		}
-	});
-});
-
-router.put('/viewer', middleware.isLoggedIn, function(req, res, next) {
-	Viewer.findById(req.session.viewerID, function (err, viewer) {
-		if (err) {
-			next(err);
-		} else {
-			viewer.update(req.body, function (err, viewer) {
-    		if (err) {
-					next(err);
-				} else {
-					res.status(200);
-					res.json({
-						viewer
-					});
-				}
-  		});
-		}
-	});
-});
-
-router.delete('/viewer', middleware.isLoggedIn, function(req, res, next) {
-	Viewer.remove({_id: req.session.viewerID}, function (err) {
-		if (err) {
-			next(err);
-		} else {
-			req.session.destroy(function(err) {
-				if (err) {
-		    	return next(err);
-		  	} else {
-					res.status(200);
-					res.json({
-						success: {
-  						message: 'Viewer deleted'
-  					}
-					});
-		  	}
-			});
+			res.send({redirect: '/signup-content'});
 		}
 	});
 });
@@ -106,7 +66,7 @@ router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 	    		if (err) {
 						next(err);
 					} else {
-						res.send({redirect: '/home.html'});
+						res.send({redirect: '/home'});
 					}
 	  		});
 			});
@@ -116,11 +76,12 @@ router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 
 router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 	var contentTitles = req.body.contentTitles;
-	Viewer.findById(req.session.viewerID, function (err, viewer) {
+	Viewer.findById(req.session.viewerID, function(err, viewer) {
 		if (err) {
 			next(err);
 		} else {
-			Viewer.find({'_id': { $in: viewer.other_viewers}}, function(err, otherViewers) {
+			Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
+				otherViewers.unshift(viewer);
 		    res.send(otherViewers);
 			});
 		}

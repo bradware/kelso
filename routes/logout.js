@@ -7,6 +7,7 @@ var router = express.Router();
 var middleware = require('middleware');
 
 router.get('/logout', middleware.isLoggedIn, function(req, res, next) {
+	console.log('in here');
   req.session.destroy(function(err) {
     if (err) {
     	return next(err);

@@ -19,6 +19,8 @@ var logoutRoute = require('routes/logout');
 var viewerRoute = require('routes/viewer');
 var contentRoute = require('routes/content');
 var groupRoute = require('routes/group');
+var trackerRoute = require('routes/tracker');
+var mainRoutes = require('routes/main');
 
 // Constants
 var port = process.env.PORT || 3001;
@@ -61,13 +63,17 @@ if (app.get('env') === 'production') {
 }
 app.use(session(sess));
 
-// Connect all our routes with /api
+// UI routes
+app.use(mainRoutes);
+
+// Connect all our api routes with prefix /api
 app.use(route_prefix, registerRoute);
 app.use(route_prefix, loginRoute);
 app.use(route_prefix, logoutRoute);
 app.use(route_prefix, viewerRoute);
 app.use(route_prefix, contentRoute);
 app.use(route_prefix, groupRoute);
+app.use(route_prefix, trackerRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

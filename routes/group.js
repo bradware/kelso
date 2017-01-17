@@ -12,10 +12,6 @@ var Content = require('models/content');
 router.post('/group', middleware.isLoggedIn, function(req, res, next) {
 	Viewer.find({'name': { $in: req.body.names}}, function(err, viewers) {
 		var group = new Group();
-		var loggedInUser = {};
-		loggedInUser._id = req.session.viewerID;
-		loggedInUser.name = req.session.viewerName;
-  	group.viewers.push(loggedInUser);
 		for (let i = 0; i < viewers.length; i++) {
 			var obj = {};
 			obj._id = viewers[i]._id;
@@ -31,7 +27,7 @@ router.post('/group', middleware.isLoggedIn, function(req, res, next) {
     		contentObj._id = content._id;
     		contentObj.title = content.title;
     		group.content = contentObj;
-    		group.name = req.session.viewerName + '|' + content.title;
+    		group.name = 'Created by ' + req.session.viewerName + '|' + content.title;
     		group.save(function(err, newGroup) {
 					if (err) {
 						return next(err);

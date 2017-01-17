@@ -27,7 +27,6 @@ $(document).ready(function() {
     obj.names = names;
     $.post('/api/group', obj)
       .done(function(res) {
-        console.log(res);
         if (res.redirect) {
           document.location.href = res.redirect;
         }
@@ -64,6 +63,7 @@ function getModal() {
 }
 
 function updateModalDom(arr) {
+  console.log(arr);
   for (let i = 0; i < arr.length; i++) {
     var modalComponent = getModalComponent(arr[i].name);
     $('.modal-body').append(modalComponent);
@@ -79,6 +79,3 @@ function getModalComponent(name) {
     '</div>';
   return component;
 }
-
-
-
