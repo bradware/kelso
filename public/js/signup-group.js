@@ -14,6 +14,7 @@ $(document).ready(function() {
   $('#submit-btn').click(function() {
     var obj = {};
     obj.viewers = grabInput();
+    console.log(obj);
   	$.post('/api/viewer', obj)
   		.done(function(res) {
   			if (res.redirect) {

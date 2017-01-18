@@ -27,25 +27,27 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 			next(err);
 		} else {
 			var otherViewers = req.body.viewers;
-			otherViewers.forEach(function(obj) {
-				var newViewer = new Viewer();
-				newViewer.name = obj.name;
-				newViewer.email = obj.email;
-				newViewer.password = 123;
-				newViewer.other_viewers.push(req.session.viewerID);
-				newViewer.save(function(err, newViewer) {
-					if (err) {
-						return next(err);
-					} else {
-						viewer.other_viewers.push(newViewer._id);
-						viewer.save(function(err, viewer) {
-							if (err) {
-								return next(err);
-							}
-						});
-					}
+			if (otherViewers) {
+				otherViewers.forEach(function(obj) {
+					var newViewer = new Viewer();
+					newViewer.name = obj.name;
+					newViewer.email = obj.email;
+					newViewer.password = 123;
+					newViewer.other_viewers.push(req.session.viewerID);
+					newViewer.save(function(err, newViewer) {
+						if (err) {
+							return next(err);
+						} else {
+							viewer.other_viewers.push(newViewer._id);
+							viewer.save(function(err, viewer) {
+								if (err) {
+									return next(err);
+								}
+							});
+						}
+					});
 				});
-			});
+			}
 			res.send({redirect: '/signup-content'});
 		}
 	});
