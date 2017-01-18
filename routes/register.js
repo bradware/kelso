@@ -31,7 +31,7 @@ router.post('/register', function(req, res, next) {
 						req.session.viewerID = newViewer._id;
 						req.session.viewerEmail = newViewer.email;
 						req.session.viewerName = newViewer.name;
-						res.send({redirect: '/signup-group'});
+						res.send({redirect: '/signup-viewer'});
 					}
 				});
   		} else {
@@ -42,7 +42,7 @@ router.post('/register', function(req, res, next) {
 						req.session.viewerID = viewer._id;
 						req.session.viewerEmail = viewer.email;
 						req.session.viewerName = viewer.name;
-						res.send({redirect: '/signup-group'});
+						res.send({redirect: '/signup-viewer'});
 					}
 	  		});
   		}

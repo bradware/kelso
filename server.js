@@ -83,11 +83,7 @@ app.use(function(req, res, next) {
 // Error handler, has to take in 4 params
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
-	res.json({
-		error: {
-			message: err.message
-		}
-	});
+	res.send(err.message);
 });
 
 app.listen(port, function() { 

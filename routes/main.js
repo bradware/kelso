@@ -41,7 +41,7 @@ router.get('/signup', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.redirect('/home');
 	} else {
-		res.sendFile(path.join(__dirname, '../public', 'signup-viewer.html'));
+		res.sendFile(path.join(__dirname, '../public', 'signup.html'));
 	}
 });
 
@@ -49,8 +49,8 @@ router.get('/signup-success', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../public', 'signup-success.html'));
 });
 
-router.get('/signup-group', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'signup-group.html'));
+router.get('/signup-viewer', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public', 'signup-viewer.html'));
 });
 
 router.get('/signup-content', function(req, res, next) {

@@ -28,17 +28,28 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 		} else {
 			var otherViewers = req.body.viewers;
 			if (otherViewers) {
+				console.log(otherViewers);
 				otherViewers.forEach(function(obj) {
 					var newViewer = new Viewer();
 					newViewer.name = obj.name;
 					newViewer.email = obj.email;
 					newViewer.password = 123;
-					newViewer.other_viewers.push(req.session.viewerID);
+					var viewerObj = {};
+					viewerObj._id = req.session.viewerID;
+					viewerObj.name = req.session.viewerName;
+					viewerObj.email = req.session.viewerEmail;
+					newViewer.other_viewers.push(viewerObj);
 					newViewer.save(function(err, newViewer) {
 						if (err) {
 							return next(err);
 						} else {
-							viewer.other_viewers.push(newViewer._id);
+							var newViewerObj = {};
+							newViewerObj._id = newViewer._id;
+							newViewerObj.name = newViewer.name;
+							newViewerObj.email = newViewer.email;
+							console.log('pushing another viewer');
+							console.log(newViewerObj);
+							viewer.other_viewers.push(newViewerObj);
 							viewer.save(function(err, viewer) {
 								if (err) {
 									return next(err);
@@ -54,30 +65,33 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 });
 
 router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-	var contentTitles = req.body.contentTitles;
-	Viewer.findById(req.session.viewerID, function (err, viewer) {
+	Content.findOne({'title': {$in: req.body.contentTitle}}, function(err, content) {
 		if (err) {
 			next(err);
 		} else {
-			Content.find({'title': { $in: req.body.contentTitles}}, function(err, contents) {
-		    var arr = [];
-		    for (let i = 0; i < contents.length; i++) {
-		    	arr.push(contents[i]._id);
-		    }
-				viewer.update({content: arr}, function (err, viewer) {
-	    		if (err) {
+			var contentObj = {};
+			contentObj._id = content._id;
+			contentObj.title = content.title;
+			
+			for (let i = 0; i < req.body.ids.length; i++) {
+				Viewer.findById(req.body.ids[i], function (err, viewer) {
+					if (err) {
 						next(err);
 					} else {
-						res.send({redirect: '/home'});
+						viewer.content.push(contentObj);
+						viewer.save(function (err, viewer) {
+			    		if (err) {
+								next(err);
+							}
+			  		});
 					}
-	  		});
-			});
+				});
+			}
 		}
 	});
 });
 
-router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-	var contentTitles = req.body.contentTitles;
+router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
 	Viewer.findById(req.session.viewerID, function(err, viewer) {
 		if (err) {
 			next(err);

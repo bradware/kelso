@@ -1,5 +1,7 @@
 'use strict';
 
+var viewerMap = {};
+
 // Wait until DOM loads
 $(document).ready(function() {
   var submitBtn = $('#submit-btn');
@@ -11,21 +13,21 @@ $(document).ready(function() {
 
   tile.click(function(e) {
     contentTitle = e.currentTarget.children[0].children[0].innerHTML;
-    $('#modal-title')[0].innerText = 'I watch ' + contentTitle + ' with...';
+    $('#modal-title')[0].innerText = 'Who watches ' + contentTitle + '?';
   });
 
   $('#save').click(function() {
     var obj = {};
     obj.contentTitle = contentTitle;
     var checkboxes = $('input:checkbox');
-    var names = [];
+    var ids = [];
     for (let i = 0; i < checkboxes.length; i++) {
       if (checkboxes[i].checked) {
-        names.push(checkboxes[i].labels[0].innerText);
+        ids.push(viewerMap[checkboxes[i].labels[0].innerText]);
       }
     }
-    obj.names = names;
-    $.post('/api/group', obj)
+    obj.ids = ids;
+    $.post('/api/viewer/content', obj)
       .done(function(res) {
         if (res.redirect) {
           document.location.href = res.redirect;
@@ -53,13 +55,20 @@ function clearCheckboxes() {
 
 
 function getModal() {
-  $.get('/api/viewer/content')
+  $.get('/api/viewers')
     .done(function(res) {
       updateModalDom(res);
+      updateViewerMap(res);
     })
     .fail(function(error) {
       console.log(error);
     });
+}
+
+function updateViewerMap(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    viewerMap[arr[i].name] = arr[i]._id;
+  }
 }
 
 function updateModalDom(arr) {

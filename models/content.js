@@ -8,6 +8,7 @@ var ContentSchema = mongoose.Schema({
 	description: {type: String, trim: true},
 	source: {type: String, enum: ['BROADCAST', 'CABLE', 'ONDEMAND', 'STREAMING', 'DVR', 'NETFLIX', 'HULU', 'HBO'], required: true},
 	popularity: {type: String, enum: ['1', '2', '3', '4', '5']},
+	series: {type: Boolean, default: true},
 	season_num: {type: Number},
 	episode_num: {type: Number},
 	created_at: {type: Date, default: Date.now}

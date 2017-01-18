@@ -1,15 +1,21 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
-const SALT_ROUNDS = 10;
 
 var ViewerSchema = mongoose.Schema({
 	name: {type: String, required: true, trim: true},
 	age: {type: Number},
 	gender: {type: String, enum: ['MALE', 'FEMALE']},
 	email: {type: String, required: true, unique: true, trim: true},
-	other_viewers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'}],
+	other_viewers: [{
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'},
+		name: {type: String, trim: true},
+		email: {type: String, trim: true}
+	}],
+	content: [{
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
+		title: {type: String, trim: true}
+	}],
 	password: {type: String},
 	created_at: {type: Date, default: Date.now}
 });
@@ -38,22 +44,6 @@ ViewerSchema.statics.authenticate = function(email, password, callback) {
 		}
 	});
 }
-
-// Hash & Salt password, ssn4 before saving to Mongo
-/**
-ViewerSchema.pre('save', function(next) {
-	// Salts & hashes password
-	var viewer = this;
-	bcrypt.hash(viewer.password, SALT_ROUNDS, function(err, hash) {
-		if (err) {
-			return next(err);
-		} else {
-			viewer.password = hash;
-			next();
-		}
-	});
-});
-*/
 
 var Viewer = mongoose.model('Viewer', ViewerSchema);
 module.exports = Viewer;
