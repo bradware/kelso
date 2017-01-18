@@ -6,8 +6,8 @@
 	margin-top: 20px;
 }
 
-#members {
-	padding-top: 25px;
+.member {
+	padding: 10px 0 10px 0;
 }
 
 .tile {
@@ -17,4 +17,9 @@
 
 .tile-content {
 	margin-top: 75px;
+}
+
+.fa-times {
+	float: right;
+	font-size: 18px;
 }

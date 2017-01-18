@@ -1,21 +1,17 @@
 'use strict';
 
 // Wait until DOM loads
-$(document).ready(function() {
-	var submitBtn = $('#submit-btn');
-	var members = $('#members');
-  var addMember = $('#add-member');
-  
-
-  addMember.click(function() {
+$(document).ready(function() {  
+  $('#add-member').click(function() {
   	var emptyInput = checkInput();
   	if (!emptyInput) {
   		var memberComponent = getMemberComponent();
-  		members.append(memberComponent);
+  		$('#members').append(memberComponent);
   	}
+    $('#submit-btn').prop('disabled', true);
   });
 
-  submitBtn.click(function() {
+  $('#submit-btn').click(function() {
     var obj = {};
     obj.viewers = grabInput();
   	$.post('/api/viewer', obj)
@@ -29,19 +25,20 @@ $(document).ready(function() {
   		});
   });
 
-  $('input').keypress(function(e) {
-    var emptyInput = checkInput();
-  	if (!emptyInput) {
-  		submitBtn.prop('disabled', false);
-  	} else {
-  		submitBtn.prop('disabled', true);
-  	}
+  $(document).on('blur', 'input', function(e) {
+    validateDom();
+  });
+
+  $(document).on('click', '.fa-times', function(e) {
+    $(this)[0].parentElement.remove();
+    validateDom();
   });
 });
 
 function getMemberComponent() {
 	var content = 
 		'<div class="member">' +
+      '<i class="fa fa-times"></i>' +
       '<div class="form-group">' + 
         '<label for="name">Name</label>' + 
         '<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
@@ -52,6 +49,15 @@ function getMemberComponent() {
       '</div>' + 
 		'</div>';
 	return content;
+}
+
+function validateDom() {
+  var emptyInput = checkInput();
+  if (!emptyInput) {
+    $('#submit-btn').prop('disabled', false);
+  } else {
+    $('#submit-btn').prop('disabled', true);
+  }
 }
 
 function checkInput() {
@@ -74,6 +80,5 @@ function grabInput() {
     obj.email = fields[i+1].value;
     arr.push(obj);
   }
-
   return arr;
 }
