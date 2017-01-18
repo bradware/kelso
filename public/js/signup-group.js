@@ -11,7 +11,7 @@ $(document).ready(function() {
   	var emptyInput = checkInput();
   	if (!emptyInput) {
   		var memberComponent = getMemberComponent();
-  		members.prepend(memberComponent);
+  		members.append(memberComponent);
   	}
   });
 

@@ -15,6 +15,20 @@ router.get('/login', function(req, res, next) {
 	}
 });
 
+router.get('/logout', function(req, res, next) {
+	if (isLoggedIn(req)) {
+		req.session.destroy(function(err) {
+	    if (err) {
+	    	return next(err);
+	  	} else {
+	  		res.sendFile(path.join(__dirname, '../public', 'index.html'));
+	  	}
+		});
+	} else {
+		res.redirect('/login');
+	}
+});
+
 router.get('/home', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.sendFile(path.join(__dirname, '../public', 'home.html'));
@@ -47,7 +61,6 @@ router.get('/watch', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.sendFile(path.join(__dirname, '../public', 'watch.html'));
 	} else {
-		console.log('in here 3');
 		res.redirect('/login');
 	}
 });

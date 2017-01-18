@@ -15,7 +15,6 @@ var MongoStore = require('connect-mongo')(session);
 // Required routes
 var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
-var logoutRoute = require('routes/logout');
 var viewerRoute = require('routes/viewer');
 var contentRoute = require('routes/content');
 var groupRoute = require('routes/group');
@@ -69,7 +68,6 @@ app.use(mainRoutes);
 // Connect all our api routes with prefix /api
 app.use(route_prefix, registerRoute);
 app.use(route_prefix, loginRoute);
-app.use(route_prefix, logoutRoute);
 app.use(route_prefix, viewerRoute);
 app.use(route_prefix, contentRoute);
 app.use(route_prefix, groupRoute);

@@ -63,7 +63,6 @@ function getModal() {
 }
 
 function updateModalDom(arr) {
-  console.log(arr);
   for (let i = 0; i < arr.length; i++) {
     var modalComponent = getModalComponent(arr[i].name);
     $('.modal-body').append(modalComponent);
