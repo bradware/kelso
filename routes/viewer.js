@@ -59,7 +59,6 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 
 function updateOtherViewersArray(viewer, viewerSmall) {
 	var found = false;
-	console.log('Before procesing', viewer);
 	for (var i = 0; i < viewer.other_viewers.length; i++) {
     if (viewer.other_viewers[i].email === viewerSmall.email) {
         found = true;
@@ -132,18 +131,32 @@ router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 					if (err) {
 						next(err);
 					} else {
-						viewer.content.push(contentObj);
-						viewer.save(function (err, viewer) {
-			    		if (err) {
-								next(err);
-							}
-			  		});
+						if (updateContentArray(viewer.content, contentObj.title)) {
+							Viewer.findByIdAndUpdate(viewer._id, {$push:{content: contentObj}}, {new: true}, function(err) {
+								if (err) {
+									return next(err);
+								} else {
+									res.status(200);
+								}
+							});
+						}
 					}
 				});
 			}
 		}
 	});
 });
+
+function updateContentArray(content, title) {
+	var found = false;
+	for (var i = 0; i < content.length; i++) {
+    if (content[i].title === title) {
+        found = true;
+        break;
+    }
+	}
+	return !found;
+}
 
 router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
 	Viewer.findById(req.session.viewerID, function(err, viewer) {

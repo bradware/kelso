@@ -16,7 +16,6 @@ $(document).ready(function() {
     obj.viewers = grabInput();
   	$.post('/api/viewer', obj)
   		.done(function(res) {
-        console.log(res);
   			if (res.redirect) {
     			document.location.href = res.redirect;
 				}
