@@ -35,16 +35,16 @@ router.post('/register', function(req, res, next) {
 					}
 				});
   		} else {
-  			viewer.update(req.body, function (err, viewer) {
-	    		if (err) {
+  			Viewer.findByIdAndUpdate(viewer._id, req.body, function (err, updatedViewer) {
+				  if (err) {
 						next(err);
 					} else {
-						req.session.viewerID = viewer._id;
-						req.session.viewerEmail = viewer.email;
-						req.session.viewerName = viewer.name;
+						req.session.viewerID = updatedViewer._id;
+						req.session.viewerEmail = updatedViewer.email;
+						req.session.viewerName = updatedViewer.name;
 						res.send({redirect: '/signup-viewer'});
 					}
-	  		});
+				});
   		}
   	}
   });

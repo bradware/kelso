@@ -28,11 +28,6 @@ $(document).ready(function() {
     }
     obj.ids = ids;
     $.post('/api/viewer/content', obj)
-      .done(function(res) {
-        if (res.redirect) {
-          document.location.href = res.redirect;
-        }
-      })
       .fail(function(error) {
         console.log(error);
       });

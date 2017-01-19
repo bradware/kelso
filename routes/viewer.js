@@ -26,43 +26,67 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
-			var otherViewers = req.body.viewers;
-			if (otherViewers) {
-				console.log(otherViewers);
-				otherViewers.forEach(function(obj) {
-					var newViewer = new Viewer();
-					newViewer.name = obj.name;
-					newViewer.email = obj.email;
-					newViewer.password = 123;
-					var viewerObj = {};
-					viewerObj._id = req.session.viewerID;
-					viewerObj.name = req.session.viewerName;
-					viewerObj.email = req.session.viewerEmail;
-					newViewer.other_viewers.push(viewerObj);
-					newViewer.save(function(err, newViewer) {
-						if (err) {
-							return next(err);
-						} else {
-							var newViewerObj = {};
-							newViewerObj._id = newViewer._id;
-							newViewerObj.name = newViewer.name;
-							newViewerObj.email = newViewer.email;
-							console.log('pushing another viewer');
-							console.log(newViewerObj);
-							viewer.other_viewers.push(newViewerObj);
-							viewer.save(function(err, viewer) {
-								if (err) {
-									return next(err);
-								}
-							});
-						}
-					});
+			if (req.body.viewers) {
+				var viewerSmall = createViewerSmall(viewer);
+				req.body.viewers.forEach(function(obj) {
+					var otherViewer = otherViewerExists(obj, viewerSmall);
+					if (!otherViewer) {
+						otherViewer = createNewViewer(obj, viewerSmall);
+					}
+					viewer.other_viewers.push(createViewerSmall(otherViewer));
+				});
+				viewer.save(function(err) {
+					if (err) {
+						console.log(err);
+						next(err);
+					}
 				});
 			}
 			res.send({redirect: '/signup-content'});
 		}
 	});
 });
+
+function otherViewerExists(obj, viewerSmall) {
+	var otherViewer = null;
+	Viewer.findOne({'email': obj.email}, function(err, viewer) {
+		if (err) {
+			next(err);
+		} else {
+			if (viewer) {
+				viewer.other_viewers.push(viewerSmall);
+				otherViewer = viewer;
+				viewer.save(function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
+			}
+		}
+	});
+	return otherViewer;
+}
+
+function createViewerSmall(viewer) {
+	var otherViewer = {};
+	otherViewer._id = viewer._id;
+	otherViewer.name = viewer.name;
+	otherViewer.email = viewer.email;
+	return otherViewer;
+}
+
+function createNewViewer(obj, viewer) {
+	var newViewer = new Viewer();
+	newViewer.name = obj.name;
+	newViewer.email = obj.email;
+	newViewer.other_viewers.push(viewer);
+	newViewer.save(function(err) {
+		if (err) {
+			console.log(err);
+		}
+	});
+	return newViewer;
+}
 
 router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 	Content.findOne({'title': {$in: req.body.contentTitle}}, function(err, content) {
