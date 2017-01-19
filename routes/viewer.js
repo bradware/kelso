@@ -22,49 +22,78 @@ router.get('/viewer', middleware.isLoggedIn, function(req, res, next) {
 });
 
 router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
+	console.log('RECEIVED A POST');
 	Viewer.findById(req.session.viewerID, function (err, viewer) {
 		if (err) {
 			next(err);
 		} else {
 			if (req.body.viewers) {
+				if (!viewer) {
+					console.log('VIEWER IS NULL', viewer);
+				}
 				var viewerSmall = createViewerSmall(viewer);
 				req.body.viewers.forEach(function(obj) {
-					var otherViewer = otherViewerExists(obj, viewerSmall);
-					if (!otherViewer) {
-						otherViewer = createNewViewer(obj, viewerSmall);
-					}
-					viewer.other_viewers.push(createViewerSmall(otherViewer));
-				});
-				viewer.save(function(err) {
-					if (err) {
-						console.log(err);
-						next(err);
-					}
+					console.log('IN THE LOOP');
+					otherViewerExists(obj, viewerSmall, function(err, otherViewer) {
+						if (err) {
+							next(err);
+						} else if (!otherViewer) {
+							otherViewer = createNewViewer(obj, viewerSmall);
+						}
+						var otherViewerSmall = createViewerSmall(otherViewer);
+						if (updateOtherViewersArray(viewer, otherViewerSmall)) {
+							Viewer.findByIdAndUpdate(viewer._id, {$push:{other_viewers: otherViewerSmall}}, {new: true}, function(err) {
+								if (err) {
+									return next(err);
+								}
+							});
+						}
+					});
 				});
 			}
+			res.status(200);
 			res.send({redirect: '/signup-content'});
 		}
 	});
 });
 
-function otherViewerExists(obj, viewerSmall) {
-	var otherViewer = null;
+function updateOtherViewersArray(viewer, viewerSmall) {
+	var found = false;
+	console.log('Before procesing', viewer);
+	for (var i = 0; i < viewer.other_viewers.length; i++) {
+    if (viewer.other_viewers[i].email === viewerSmall.email) {
+        found = true;
+        break;
+    }
+	}
+	return !found;
+}
+
+function otherViewerExists(obj, viewerSmall, callback) {
 	Viewer.findOne({'email': obj.email}, function(err, viewer) {
 		if (err) {
-			next(err);
+			console.log(err);
+			callback(err, null);
 		} else {
 			if (viewer) {
-				viewer.other_viewers.push(viewerSmall);
-				otherViewer = viewer;
+				if (updateOtherViewersArray(viewer, viewerSmall)) {
+					Viewer.findByIdAndUpdate(viewer._id, {$push:{other_viewers: viewerSmall}}, {new: true}, function(err) {
+						if (err) {
+							return next(err);
+						}
+					});
+				}
 				viewer.save(function(err) {
 					if (err) {
 						console.log(err);
 					}
 				});
+				callback(null, viewer);
+			} else {
+				callback(null);
 			}
 		}
 	});
-	return otherViewer;
 }
 
 function createViewerSmall(viewer) {
@@ -75,15 +104,16 @@ function createViewerSmall(viewer) {
 	return otherViewer;
 }
 
-function createNewViewer(obj, viewer) {
+function createNewViewer(obj, viewerSmall) {
 	var newViewer = new Viewer();
 	newViewer.name = obj.name;
 	newViewer.email = obj.email;
-	newViewer.other_viewers.push(viewer);
+	newViewer.other_viewers.push(viewerSmall);
 	newViewer.save(function(err) {
 		if (err) {
 			console.log(err);
 		}
+		console.log('New VIEWER SAVED');
 	});
 	return newViewer;
 }
@@ -121,8 +151,14 @@ router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
 			next(err);
 		} else {
 			Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
-				otherViewers.unshift(viewer);
-		    res.send(otherViewers);
+				if (otherViewers) {
+					otherViewers.unshift(viewer);
+		    	res.send(otherViewers);
+				} else {
+					otherViewers = [];
+					otherViewers.push(viewer);
+					res.send(otherViewers);
+				}
 			});
 		}
 	});
