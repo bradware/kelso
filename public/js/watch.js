@@ -2,22 +2,29 @@
 
 var viewer = null;
 var otherViewers = {};
+var contentTitle = null;
+var contentID = null;
 
 // Wait until DOM loads
 $(document).ready(function() {
 	getContentTiles();
 
 	$(document).on('click', '.tile', function(e) { 
-  	var div = e.currentTarget.children[0];
-  	var contentTitle = div.children[0].innerHTML;
-  	var names = div.children[1].innerHTML.trim().split(' ');
-  	groupID = e.currentTarget.id
-  	$('#modal-title')[0].innerText = 'Watching ' + contentTitle + ' with \n' + names + '?';
+  	contentTitle = e.currentTarget.children[0].children[0].innerHTML;
+  	contentID = e.currentTarget.id;
+  	$('#modal-title')[0].innerText = 'Watch ' + contentTitle + ' ?';
 	});
 
-	$('#watch').click(function() {
+	$('#watch-btn').click(function() {
 		var obj = {};
-    obj.group = groupMap[groupID];
+		obj.viewer = createViewerSmall(viewer);
+		obj.content = createContentSmall();
+		obj.other_viewers = [];
+		var otherViewersChecked = getOtherViewersChecked();
+		for (let i = 0; i < otherViewersChecked.length; i++) {
+			obj.other_viewers.push(createViewerSmall(otherViewers[otherViewersChecked[i]]));
+		}
+    
     $.post('/api/tracker', obj)
       .done(function(res) {
         if (res.redirect) {
@@ -30,26 +37,42 @@ $(document).ready(function() {
   });
 
 	$(document).on('click', 'input:checkbox', function(e) { 
-		var otherViewersChecked = [];
-  	var checkboxes = $('input:checkbox');
-  	var anyChecked = false;
-  	for (let i = 0; i < checkboxes.length; i++) {
-  		if (checkboxes[i].checked) {
-  			otherViewersChecked.push(checkboxes[i].id);
-  			anyChecked = true;
-  		}
-  	}
-
-  	if (!anyChecked) {
+		var otherViewersChecked = getOtherViewersChecked();
+  	if (otherViewersChecked.length === 0) {
   		var contentDom = viewer.content;
   	} else {
   		var contentDom = findIntersection(otherViewersChecked);
   	}
-
   	$('#contents').empty();
   	renderContentTiles(contentDom);
 	});
 });
+
+function getOtherViewersChecked() {
+	var otherViewersChecked = [];
+	var checkboxes = $('input:checkbox');
+	for (let i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			otherViewersChecked.push(checkboxes[i].id);
+		}
+	}
+	return otherViewersChecked;
+}
+
+function createContentSmall() {
+	var contentSmall = {};
+	contentSmall._id = contentID;
+	contentSmall.title = contentTitle;
+	return contentSmall;
+}
+
+function createViewerSmall(viewer) {
+	var otherViewer = {};
+	otherViewer._id = viewer._id;
+	otherViewer.name = viewer.name;
+	otherViewer.email = viewer.email;
+	return otherViewer;
+}
 
 function findIntersection(otherViewersChecked) {
 	var newContentDom = [];

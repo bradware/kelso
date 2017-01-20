@@ -9,10 +9,7 @@ var Tracker = require('models/tracker');
 
 router.post('/tracker', middleware.isLoggedIn, function(req, res, next) {
 	console.log(req.body);
-	var tracker = new Tracker();
-	tracker.viewer = req.session.viewerID;
-	tracker.group = req.body.group._id;
-	tracker.content = req.body.group.content._id;
+	var tracker = new Tracker(req.body);
 	tracker.save(function(err, newTracker) {
 		if (err) {
 			return next(err);

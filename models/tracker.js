@@ -3,9 +3,23 @@
 var mongoose = require('mongoose');
 
 var TrackerSchema = mongoose.Schema({
-	viewer: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer', required: true},
-	group: {type: mongoose.Schema.Types.ObjectId, ref: 'Group', required: true},
-	content: {type: mongoose.Schema.Types.ObjectId, ref: 'Content', required: true},
+	viewer: {
+		type: {
+			_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'},
+			name: {type: String, trim: true},
+			email: {type: String, trim: true},
+		}, 
+		required: true
+	},
+	other_viewers: [{
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'},
+		name: {type: String, trim: true},
+		email: {type: String, trim: true}
+	}],
+	content: {
+		_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
+		title: {type: String, trim: true}
+	},
 	created_at: {type: Date, default: Date.now}
 });
 
