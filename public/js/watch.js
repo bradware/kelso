@@ -30,7 +30,7 @@ $(document).ready(function() {
   });
 
 	$(document).on('click', 'input:checkbox', function(e) { 
-		var otherViewersChecked = [ ];
+		var otherViewersChecked = [];
   	var checkboxes = $('input:checkbox');
   	var anyChecked = false;
   	for (let i = 0; i < checkboxes.length; i++) {
@@ -54,21 +54,27 @@ $(document).ready(function() {
 function findIntersection(otherViewersChecked) {
 	var newContentDom = [];
 	for (let i = 0; i < viewer.content.length; i++) {
-		var found = 0;
-		for (let j = 0; j < otherViewersChecked.length; j++) {
-			var otherViewer = otherViewers[otherViewersChecked[j]];
-			for (let k = 0; k < otherViewer.content.length; k++) {
-				if (otherViewer.content[k]._id === viewer.content[i]._id) {
-					found++;
-					break;
-				}
-			}
-		}
+		var currContent = viewer.content[i];
+		var found = findIntersectionOtherViewers(currContent, otherViewersChecked);
 		if (found === otherViewersChecked.length) {
-			newContentDom.push(viewer.content[i]);
+			newContentDom.push(currContent);
 		}
 	}
 	return newContentDom;
+}
+ 
+function findIntersectionOtherViewers(currContent, otherViewersChecked) {
+	var found = 0;
+	for (let j = 0; j < otherViewersChecked.length; j++) {
+		var otherViewer = otherViewers[otherViewersChecked[j]];
+		for (let k = 0; k < otherViewer.content.length; k++) {
+			if (otherViewer.content[k]._id === currContent._id) {
+				found++;
+				break;
+			}
+		}
+	}
+	return found;
 }
 
 function renderNames() {
