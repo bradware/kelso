@@ -57,6 +57,14 @@ router.get('/signup-content', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../public', 'signup-content.html'));
 });
 
+router.get('/add-viewer', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public', 'add-viewer.html'));
+});
+
+router.get('/add-content', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public', 'add-content.html'));
+});
+
 router.get('/watch', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.sendFile(path.join(__dirname, '../public', 'watch.html'));

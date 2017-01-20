@@ -13,14 +13,18 @@
     <!-- CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
     <link href="styles/signup.css" rel="stylesheet">
     <!-- END OF HEADER -->
   </head>
   <body class="container-fluid">
+    <!-- Header Inserted - NO PANEL HEADING ON INDEX -->
+    <header class="row"></header>
+    <!-- End of Header -->
     <main>
       <div class="row text-center header">
         <i class="fa fa-users fa-3x"></i>
-        <h2>I watch with...</h2>
       </div>
       <div class="text-center">
         <div id="members">
@@ -37,13 +41,16 @@
           </div>
         </div>
         <button id="add-member"><i class="fa fa-plus-circle fa-2x">Add another</i></button>
-        <button type="submit" id="submit-btn" class="btn btn-primary btn-lg btn-block" disabled="disabled">Next</button>
+        <a href="/home">
+          <button type="submit" id="submit-btn" class="btn btn-primary btn-lg btn-block" disabled="disabled">Save</button>
+        </a>
       </div>
     </main>
 
     <!-- JS -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/signup-viewer.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/add-viewer.js"></script>
   </body>
 </html>

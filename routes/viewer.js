@@ -14,26 +14,19 @@ router.get('/viewer', middleware.isLoggedIn, function(req, res, next) {
 			next(err);
 		} else {
 			res.status(200);
-			res.json({
-				viewer
-			});
+			res.send(viewer);
 		}
 	});
 });
 
 router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
-	console.log('RECEIVED A POST');
 	Viewer.findById(req.session.viewerID, function (err, viewer) {
 		if (err) {
 			next(err);
 		} else {
 			if (req.body.viewers) {
-				if (!viewer) {
-					console.log('VIEWER IS NULL', viewer);
-				}
 				var viewerSmall = createViewerSmall(viewer);
 				req.body.viewers.forEach(function(obj) {
-					console.log('IN THE LOOP');
 					otherViewerExists(obj, viewerSmall, function(err, otherViewer) {
 						if (err) {
 							next(err);
