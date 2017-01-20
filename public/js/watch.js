@@ -1,12 +1,11 @@
 'use strict';
 
-var groupMap = {};
-var groupID = null;
-var names = new Set();
+var viewer = null;
+var otherViewers = {};
 
 // Wait until DOM loads
 $(document).ready(function() {
-	getGroups();
+	getContentTiles();
 
 	$(document).on('click', '.tile', function(e) { 
   	var div = e.currentTarget.children[0];
@@ -31,59 +30,69 @@ $(document).ready(function() {
   });
 
 	$(document).on('click', 'input:checkbox', function(e) { 
-  	var checkbox = $(this)[0];
-  	if (checkbox.checked) {
-  		editGroups(checkbox.value, true);
-  	} else {
-  		editGroups(checkbox.value, false);
+		var otherViewersChecked = [ ];
+  	var checkboxes = $('input:checkbox');
+  	var anyChecked = false;
+  	for (let i = 0; i < checkboxes.length; i++) {
+  		if (checkboxes[i].checked) {
+  			otherViewersChecked.push(checkboxes[i].id);
+  			anyChecked = true;
+  		}
   	}
+
+  	if (!anyChecked) {
+  		var contentDom = viewer.content;
+  	} else {
+  		var contentDom = findIntersection(otherViewersChecked);
+  	}
+
+  	$('#contents').empty();
+  	renderContentTiles(contentDom);
 	});
 });
 
-function editGroups(name, show) {
-	for (var id in groupMap) {
-		var group = groupMap[id];
-		var viewers = group.viewers;
-		for (let i = 0; i < viewers.length; i++) {
-			if (viewers[i].name === name) {
-				show ? $('#'+id).show() : $('#'+id).hide();
-				break;
+function findIntersection(otherViewersChecked) {
+	var newContentDom = [];
+	for (let i = 0; i < viewer.content.length; i++) {
+		var found = 0;
+		for (let j = 0; j < otherViewersChecked.length; j++) {
+			var otherViewer = otherViewers[otherViewersChecked[j]];
+			for (let k = 0; k < otherViewer.content.length; k++) {
+				if (otherViewer.content[k]._id === viewer.content[i]._id) {
+					found++;
+					break;
+				}
 			}
 		}
-	}
-}
-
-function addGroupsToDom(name) {
-	for (var id in groupMap) {
-		var group = groupMap[id];
-		var viewers = group.viewers;
-		for (let i = 0; i < viewers.length; i++) {
-			if (viewers[i].name === name) {
-				$('#'+id).show();
-			}
+		if (found === otherViewersChecked.length) {
+			newContentDom.push(viewer.content[i]);
 		}
 	}
+	return newContentDom;
 }
 
 function renderNames() {
-	names.forEach(function(name) {
-		var nameComponent = renderNameComponent(name);
+	for (var id in otherViewers) {
+		var nameComponent = renderNameComponent(otherViewers[id]);
 		$('#names').append(nameComponent);
-	});
+	}
 }
 
-function renderNameComponent(name) {
+function renderNameComponent(otherViewer) {
+	var id = otherViewer._id;
+	var name = otherViewer.name;
 	var component =
 		'<label class="checkbox-inline">' +
-	    '<input type="checkbox" id="inlineCheckbox1" value="' + name + '" checked>' + name +
+	    '<input type="checkbox" id="' + id + '" value="' + name + '">' + name +
 	  '</label>';
 	return component;
 }
 
-function getGroups() {
-	$.get('/api/groups')
+function getContentTiles() {
+	$.get('/api/viewer/content')
 	  .done(function(res) {
-	    renderGroups(res.groups);
+	    setGlobals(res);
+	    renderContentTiles(viewer.content);
 	    renderNames();
 	  })
 	  .fail(function(error) {
@@ -91,35 +100,29 @@ function getGroups() {
 	  });
 }
 
-
-function renderGroups(groups) {
-	for (let i = 0; i < groups.length; i++) {
-		var group = renderGroup(groups[i]);
-		$('#groups').append(group);
+function renderContentTiles(contentDom) {
+	for (let i = 0; i < contentDom.length; i++) {
+		var contentTile = renderContentTile(contentDom[i]);
+		$('#contents').append(contentTile);
 	}
 }
 
-function renderGroup(group) {
-	groupMap[group._id] = group;
-	var names = parseNames(group.viewers);
-	var group =
+function renderContentTile(content) {
+	var content =
 		'<div class="row">' +
 	    '<div class="col-xs-12 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm" ' 
-	    	+ 'id="' + group._id + '" ' + '>' +
+	    	+ 'id="' + content._id + '" ' + '>' +
 	      '<div class="tile-content">' +
-	        '<h4>' + group.content.title + '</h4>' +
-	        '<h5>' + names + '</h5>' +
+	        '<h4>' + content.title + '</h4>' +
 	      '</div>' +
 	    '</div>' +
 	  '</div>';
-	return group;
+	return content;
 }
 
-function parseNames(viewers) {
-	var str = '';
-	for (let i = 0; i < viewers.length; i++) {
-		str += viewers[i].name + ' ';
-		names.add(viewers[i].name);
+function setGlobals(res) {
+	viewer = res.viewer;
+	for (let i = 0; i < res.other_viewers.length; i++) {
+		otherViewers[res.other_viewers[i]._id] = res.other_viewers[i];
 	}
-	return str;
 }

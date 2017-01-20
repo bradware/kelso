@@ -177,4 +177,25 @@ router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
 	});
 });
 
+router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
+	Viewer.findById(req.session.viewerID, function(err, viewer) {
+		if (err) {
+			next(err);
+		} else {
+			var obj = {};
+			obj.viewer = viewer;
+
+			Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
+				if (otherViewers) {
+					obj.other_viewers = otherViewers;
+		    	res.send(obj);
+				} else {
+					obj.other_viewers = [];
+					res.send(obj);
+				}
+			});
+		}
+	});
+});
+
 module.exports = router;
