@@ -10,12 +10,16 @@ $(document).ready(function() {
 	var female = $('#female');
 	var male = $('#male');
 
-	$('input').keypress(function(e) {
+	$('input').blur(function(e) {
     if (name.val() && email.val() && email.val().includes('@') 
     	&& password.val() && handleAge(age.val())) {
-       submitBtn.prop('disabled', false);
+      submitBtn.prop('disabled', false);
+      submitBtn.addClass('green');
+      submitBtn.removeClass('purple');
     } else {
     	submitBtn.prop('disabled', true);
+      submitBtn.addClass('purple');
+      submitBtn.removeClass('green');
     }
   });
 

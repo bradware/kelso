@@ -1,0 +1,25 @@
+.navbar {
+	min-height: 70px;
+}
+
+.navbar-default {
+	background-color: #5ACBAD;
+  border-color: #E8EBF2;
+}
+
+.navbar-brand {
+	margin-top: 10px;
+}
+
+.logo-brand {
+  position: absolute;
+  left: 50%;
+  margin-left: -32px;  /* 50% of your logo width */
+  margin-top: 15px;
+  display: block;
+}
+
+#header-logo {
+	height: 45px;
+	width: 73px;
+}

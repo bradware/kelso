@@ -5,12 +5,18 @@ $(document).ready(function() {
   var email = $('#email');
   var password = $('#password');
 	var submitBtn = $('#submit-btn');
+  var purple = '#727DF0';
+  var green = '#5ACBAD';
 
-  $('input').keypress(function(e) {
+  $('input').blur(function(e) {
     if (email.val() && password.val()) {
-       submitBtn.prop('disabled', false);
+      submitBtn.prop('disabled', false);
+      submitBtn.addClass('green');
+      submitBtn.removeClass('purple');
     } else {
       submitBtn.prop('disabled', true);
+      submitBtn.addClass('purple');
+      submitBtn.removeClass('green');
     }
   });
 	

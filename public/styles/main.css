@@ -1,11 +1,18 @@
 html, body {
+	background-color: #E8EBF2;
+	color: #E8EBF2;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   margin: 0;
   min-height: 100%;
 }
 
 main {
-	padding: 5% 0 5% 0;
+	background-color: #2C2F3D; /* Dark Gray */
+	margin-top: 75px;
+}
+
+.wrapper {
+	padding: 0 10% 0 10%;
 }
 
 a:link {
@@ -28,16 +35,24 @@ a:active {
   text-decoration: none;
 }
 
+h2 {
+	font-size: 22px;
+}
+
+.page-title {
+	margin: 10px 0 10px 0;
+}
+
+.page-content {
+	margin: 20px 0 40px 0;
+}
+
 .green {
 	background-color: #5ACBAD;
 }
 
 .purple {
 	background-color: #727DF0;
-}
-
-.light-gray {
-	color: #E8EBF2;
 }
 
 .button-container {
@@ -47,12 +62,10 @@ a:active {
 button.button-theme {
 	border-radius: 0;
 	/*box-shadow: 0 0 4px #2C2F3D;*/
-	border: 1px solid #2C2F3D;
+	/*border: 1px solid #2C2F3D;*/
 	color: #E8EBF2;
-	font-size: 22px;
-	height: 60px;
-	margin: auto;
-	width: 75%;
+	font-size: 26px;
+	height: 70px;
 }
 
 button.button-theme:active {
@@ -63,14 +76,13 @@ button.button-theme:focus {
   opacity: 0.75;
 }
 
-/**
-.header {
-	margin-bottom: 15px;
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-main {
-	margin-top: 75px;
-}
+/**
 
 #members {
 	padding-top: 25px;

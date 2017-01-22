@@ -13,49 +13,61 @@
     <!-- CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/header.css" rel="stylesheet">
     <link href="styles/signup.css" rel="stylesheet">
     <!-- END OF HEADER -->
   </head>
-  <body class="container-fluid">
+  <body>
+    <!-- Header Inserted - NO PANEL HEADING ON INDEX -->
+    <header class="row"></header>
+    <!-- End of Header -->
     <main>
-      <div class="row text-center header">
-        <i class="fa fa-user-o fa-3x"></i>
-        <h2>I am...</h2>
+      <!-- Wrapper -->
+      <div class="wrapper container-fluid">
+        <div class="row text-center page-title">
+          <h2>Sign up</h2>
+        </div>
+        <div class="page-content">
+          <form>
+            <div class="form-group">
+              <label for="name">name</label>
+              <input type="text" class="form-control" id="name" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label for="email">email</label>
+              <input type="email" class="form-control" id="email" placeholder="jane.doe@gmail.com" required>
+            </div>
+            <div class="form-group">
+              <label for="password">password</label>
+              <input type="password" class="form-control" id="password" placeholder="123" required>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <label for="age">age</label>
+                <input type="age" class="form-control" id="age" placeholder="25" required>
+              </div>
+              <div class="radio-group text-center col-xs-6">
+                <div class="radio">
+                  <label><input type="radio" name="optradio" id="male" checked>Guy</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio" id="female">Gal</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <form class="text-center">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" required>
-        </div>
-        <div class="row">
-          <div class="form-group col-xs-6">
-            <label for="age">Age</label>
-            <input type="age" class="form-control" id="age" placeholder="Age" required>
-          </div>
-          <div class="form-group radio-group col-xs-6">
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="male" checked> Male
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="female"> Female
-            </label>
-          </div>
-        </div>
-        <button type="button" id="submit-btn" class="btn btn-primary btn-lg btn-block" disabled="disabled">Next</button>
-      </form>
+      <button type="button" id="submit-btn" class="btn btn-lg btn-block purple button-theme fixed-bottom" disabled="disabled">
+        next
+      </button>
     </main>
 
     <!-- JS -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/signup.js"></script>
   </body>
 </html>
