@@ -2,57 +2,57 @@
 
 // Wait until DOM loads
 $(document).ready(function() {  
-  $('#add-member').click(function() {
-  	var emptyInput = checkInput();
-  	if (!emptyInput) {
-  		var memberComponent = getMemberComponent();
-  		$('#members').append(memberComponent);
-  	}
-    $('#submit-btn').prop('disabled', true);
-  });
+	$('#add-member').click(function() {
+		var emptyInput = checkInput();
+		if (!emptyInput) {
+			var memberComponent = getMemberComponent();
+			$('#members').append(memberComponent);
+		}
+		$('#submit-btn').prop('disabled', true);
+	});
 
-  $('#submit-btn').click(function() {
-    var obj = {};
-    obj.viewers = grabInput();
-  	$.post('/api/viewer', obj)
-  		.fail(function(error) {
-  			console.log(error);
-  		});
-  });
+	$('#submit-btn').click(function() {
+		var obj = {};
+		obj.viewers = grabInput();
+		$.post('/api/viewer', obj)
+			.fail(function(error) {
+				console.log(error);
+			});
+	});
 
-  $(document).on('blur', 'input', function(e) {
-    validateDom();
-  });
+	$(document).on('blur', 'input', function(e) {
+		validateDom();
+	});
 
-  $(document).on('click', '.fa-times', function(e) {
-    $(this)[0].parentElement.remove();
-    validateDom();
-  });
+	$(document).on('click', '.fa-times', function(e) {
+		$(this)[0].parentElement.remove();
+		validateDom();
+	});
 });
 
 function getMemberComponent() {
 	var content = 
 		'<div class="member">' +
-      '<i class="fa fa-times"></i>' +
-      '<div class="form-group">' + 
-        '<label for="name">Name</label>' + 
-        '<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
-      '</div>' + 
-      '<div class="form-group">' + 
-        '<label for="name">Email</label>' + 
-        '<input type="email" class="form-control" id="email" placeholder="Email" required>' + 
-      '</div>' + 
+			'<i class="fa fa-times"></i>' +
+			'<div class="form-group">' + 
+				'<label for="name">Name</label>' + 
+				'<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
+			'</div>' + 
+			'<div class="form-group">' + 
+				'<label for="name">Email</label>' + 
+				'<input type="email" class="form-control" id="email" placeholder="Email" required>' + 
+			'</div>' + 
 		'</div>';
 	return content;
 }
 
 function validateDom() {
-  var emptyInput = checkInput();
-  if (!emptyInput) {
-    $('#submit-btn').prop('disabled', false);
-  } else {
-    $('#submit-btn').prop('disabled', true);
-  }
+	var emptyInput = checkInput();
+	if (!emptyInput) {
+		$('#submit-btn').prop('disabled', false);
+	} else {
+		$('#submit-btn').prop('disabled', true);
+	}
 }
 
 function checkInput() {
@@ -67,13 +67,13 @@ function checkInput() {
 }
 
 function grabInput() {
-  var fields = $('input').find().prevObject;
-  var arr = [];
-  for (let i = 0; i < fields.length - 1; i += 2) {
-    var obj = {};
-    obj.name = fields[i].value;
-    obj.email = fields[i+1].value;
-    arr.push(obj);
-  }
-  return arr;
+	var fields = $('input').find().prevObject;
+	var arr = [];
+	for (let i = 0; i < fields.length - 1; i += 2) {
+		var obj = {};
+		obj.name = fields[i].value;
+		obj.email = fields[i+1].value;
+		arr.push(obj);
+	}
+	return arr;
 }

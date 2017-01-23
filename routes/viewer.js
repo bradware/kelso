@@ -24,7 +24,7 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
-			if (req.body.viewers) {
+			if (req.body.viewers && req.body.viewers.length > 0) {
 				var viewerSmall = createViewerSmall(viewer);
 				req.body.viewers.forEach(function(obj) {
 					otherViewerExists(obj, viewerSmall, function(err, otherViewer) {
@@ -44,9 +44,9 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 					});
 				});
 			}
-			res.status(200);
-			res.send({redirect: '/signup-content'});
 		}
+		res.status(200);
+		res.send({redirect: '/signup-content'});
 	});
 });
 

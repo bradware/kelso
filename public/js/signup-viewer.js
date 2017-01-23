@@ -2,65 +2,83 @@
 
 // Wait until DOM loads
 $(document).ready(function() {  
-  $('#add-member').click(function() {
-  	var emptyInput = checkInput();
-  	if (!emptyInput) {
-  		var memberComponent = getMemberComponent();
-  		$('#members').append(memberComponent);
-  	}
-    $('#submit-btn').prop('disabled', true);
-  });
+	$('#add-member').click(function() {
+		if (!emptyInput()) {
+			var memberComponent = getMemberComponent();
+			$('#members').append(memberComponent);
+			updateGreen();
+			$('#submit-btn').prop('disabled', true);
+		}
+	});
 
-  $('#submit-btn').click(function() {
-    var obj = {};
-    obj.viewers = grabInput();
-  	$.post('/api/viewer', obj)
-  		.done(function(res) {
-  			if (res.redirect) {
-    			document.location.href = res.redirect;
+	$('#submit-btn').click(function() {
+		var obj = {};
+		obj.viewers = grabInput();
+		$.post('/api/viewer', obj)
+			.done(function(res) {
+				if (res.redirect) {
+					document.location.href = res.redirect;
 				}
-  		})
-  		.fail(function(error) {
-  			console.log(error);
-  		});
-  });
+			})
+			.fail(function(error) {
+				console.log(error);
+			});
+	});
 
-  $(document).on('blur', 'input', function(e) {
-    validateDom();
-  });
+	$(document).on('blur', 'input', function(e) {
+		validateDom();
+	});
 
-  $(document).on('click', '.fa-times', function(e) {
-    $(this)[0].parentElement.remove();
-    validateDom();
-  });
+	$(document).on('click', '.fa-times', function(e) {
+		$(this)[0].parentElement.remove();
+		validateDom();
+	});
 });
 
 function getMemberComponent() {
 	var content = 
 		'<div class="member">' +
-      '<i class="fa fa-times"></i>' +
-      '<div class="form-group">' + 
-        '<label for="name">Name</label>' + 
-        '<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
-      '</div>' + 
-      '<div class="form-group">' + 
-        '<label for="name">Email</label>' + 
-        '<input type="email" class="form-control" id="email" placeholder="Email" required>' + 
-      '</div>' + 
+			'<i class="fa fa-times"></i>' +
+			'<form>' +
+				'<div class="form-group">' +
+					'<label for="name">name</label>' +
+					'<input type="text" class="form-control name" placeholder="Jane" required>' +
+				'</div>' +
+				'<div class="form-group">' +
+					'<label for="email">email</label>' +
+					'<input type="email" class="form-control email" placeholder="jane.doe@gmail.com" required>' +
+				'</div>' +
+			'</form>' +
 		'</div>';
 	return content;
 }
 
 function validateDom() {
-  var emptyInput = checkInput();
-  if (!emptyInput) {
-    $('#submit-btn').prop('disabled', false);
-  } else {
-    $('#submit-btn').prop('disabled', true);
-  }
+	if ($('input').length === 0) {
+		updatePurple();
+		$('#submit-btn').prop('disabled', false);
+	} else if (!emptyInput()) {
+		updateGreen();
+		$('#submit-btn').prop('disabled', false);
+	} else {
+		updateGreen();
+		$('#submit-btn').prop('disabled', true);
+	}
 }
 
-function checkInput() {
+function updateGreen() {
+	$('#submit-btn').addClass('green');
+	$('#submit-btn').removeClass('purple');
+	$('#submit-btn').html('next');
+}
+
+function updatePurple() {
+	$('#submit-btn').addClass('purple');
+	$('#submit-btn').removeClass('green');
+	$('#submit-btn').html('skip');
+}
+
+function emptyInput() {
 	var input = $('input');
 	var emptyInput = false;
 	for (let i = 0; i < input.length; i++) {
@@ -72,13 +90,15 @@ function checkInput() {
 }
 
 function grabInput() {
-  var fields = $('input').find().prevObject;
-  var arr = [];
-  for (let i = 0; i < fields.length - 1; i += 2) {
-    var obj = {};
-    obj.name = fields[i].value;
-    obj.email = fields[i+1].value;
-    arr.push(obj);
-  }
-  return arr;
+	var fields = $('input').find().prevObject;
+	var arr = [];
+	for (let i = 0; i < fields.length - 1; i += 2) {
+		var obj = {};
+		if (fields[i].value.length > 0 && fields[i+1].value.length > 0) {
+			obj.name = fields[i].value;
+			obj.email = fields[i+1].value;
+			arr.push(obj);
+		}
+	}
+	return arr;
 }

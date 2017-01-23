@@ -10,6 +10,7 @@ main {
 }
 
 button.button-theme {
+	box-shadow: 0 1px 4px #2C2F3D;
 	height: 60px;
 	margin: auto;
 	width: 75%;

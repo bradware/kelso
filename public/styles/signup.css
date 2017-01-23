@@ -18,7 +18,19 @@ label {
 }
 
 .member {
+	border-top: 1px solid #1D1F29;
 	padding: 10px 0 10px 0;
+}
+
+.member > i {
+	font-size: 18px;
+	float: right;
+}
+
+#add-member {
+	height: 60px;
+	width: 60px;
+	float: right;
 }
 
 .tile {
