@@ -7,6 +7,7 @@ html, body {
 
 main {
 	background-color: transparent;
+	margin: 25px;
 }
 
 .button-container {
@@ -21,7 +22,7 @@ button.button-theme {
 }
 
 .title {
-	margin: 10% 0 20% 0;
+	margin: 15% 0 20% 0;
 }
 
 .logo-component {

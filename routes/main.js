@@ -7,11 +7,15 @@ var router = express.Router();
 var middleware = require('middleware');
 var path = require('path');
 
+router.get('/', function(req, res, next) {
+	res.sendFile(path.join(__dirname, '../public/templates', 'index.html'));
+});
+
 router.get('/login', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.redirect('/home');
 	} else {
-		res.sendFile(path.join(__dirname, '../public', 'login.html'));
+		res.sendFile(path.join(__dirname, '../public/templates', 'login.html'));
 	}
 });
 
@@ -21,7 +25,7 @@ router.get('/logout', function(req, res, next) {
 	    if (err) {
 	    	return next(err);
 	  	} else {
-	  		res.sendFile(path.join(__dirname, '../public', 'index.html'));
+	  		res.redirect('/');
 	  	}
 		});
 	} else {
@@ -31,7 +35,7 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/home', function(req, res, next) {
 	if (isLoggedIn(req)) {
-		res.sendFile(path.join(__dirname, '../public', 'home.html'));
+		res.sendFile(path.join(__dirname, '../public/templates', 'home.html'));
 	} else {
 		res.redirect('/login');
 	}
@@ -41,33 +45,33 @@ router.get('/signup', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.redirect('/home');
 	} else {
-		res.sendFile(path.join(__dirname, '../public', 'signup.html'));
+		res.sendFile(path.join(__dirname, '../public/templates', 'signup.html'));
 	}
 });
 
 router.get('/signup-success', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'signup-success.html'));
+	res.sendFile(path.join(__dirname, '../public/templates', 'signup-success.html'));
 });
 
 router.get('/signup-viewer', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'signup-viewer.html'));
+	res.sendFile(path.join(__dirname, '../public/templates', 'signup-viewer.html'));
 });
 
 router.get('/signup-content', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'signup-content.html'));
+	res.sendFile(path.join(__dirname, '../public/templates', 'signup-content.html'));
 });
 
 router.get('/add-viewer', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'add-viewer.html'));
+	res.sendFile(path.join(__dirname, '../public/templates', 'add-viewer.html'));
 });
 
 router.get('/add-content', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public', 'add-content.html'));
+	res.sendFile(path.join(__dirname, '../public/templates', 'add-content.html'));
 });
 
 router.get('/watch', function(req, res, next) {
 	if (isLoggedIn(req)) {
-		res.sendFile(path.join(__dirname, '../public', 'watch.html'));
+		res.sendFile(path.join(__dirname, '../public/templates', 'watch.html'));
 	} else {
 		res.redirect('/login');
 	}

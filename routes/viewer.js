@@ -105,7 +105,6 @@ function createNewViewer(obj, viewerSmall) {
 		if (err) {
 			console.log(err);
 		}
-		console.log('New VIEWER SAVED');
 	});
 	return newViewer;
 }

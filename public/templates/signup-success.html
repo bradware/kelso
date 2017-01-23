@@ -14,20 +14,28 @@
 		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 		<link href="styles/main.css" rel="stylesheet">
+		<link href="styles/header.css" rel="stylesheet">
 		<!-- END OF HEADER -->
 	</head>
-	<body class="container-fluid">
+	<body>
+		<!-- Header Inserted - NO PANEL HEADING ON INDEX -->
+		<header class="row"></header>
+		<!-- End of Header -->
 		<main>
-			<div class="row text-center header">
-				<i class="fa fa-check-circle-o fa-3x"></i>
-				<h2>Success!</h2>
+			<!-- Wrapper -->
+			<div class="wrapper container-fluid">
+				<div class="row text-center">
+					<h2>Success!</h2>
+				</div>
 			</div>
-				<a href="home"><button type="button" class="btn btn-primary btn-lg btn-block">Home</button></a>
-			</div>
+			<a href="/home">
+				<button type="button" class="btn btn-lg btn-block green button-theme fixed-bottom">home</button>
+			</a>
 		</main>
 
 		<!-- JS -->
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="js/main.js"></script>
 	</body>
 </html>
