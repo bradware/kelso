@@ -7,7 +7,7 @@ html, body {
 }
 
 main {
-	background-color: #2C2F3D; /* Middle Gray */
+	background-color: #2C2F3D; /* Medium Gray */
 	margin-top: 75px;
 }
 
@@ -48,6 +48,12 @@ h2 {
 	font-weight: 300;
 }
 
+#home-title {
+	background-color: #1D1F29;
+	width: 100%;
+	padding-bottom: 5px;
+}
+
 .page-content {
 	margin: 20px 0 40px 0;
 }
@@ -58,10 +64,6 @@ h2 {
 
 .purple {
 	background-color: #727DF0;
-}
-
-.button-container {
-	margin: 15px 0 15px 0;
 }
 
 button.button-theme {
@@ -90,18 +92,58 @@ button.button-theme:focus {
 	background-color: #1D1F29;
 }
 
-/**
+/*
+	Form & Signup
+*/
 
-#members {
-	padding-top: 25px;
+form {
+	font-size: 16px;
+}
+
+label {
+	color: #CCC;
+	font-weight: 400;
+}
+
+.form-control {
+	background-color: transparent;
+	border-radius: 0;
+	color: #E8EBF2;
+}
+
+.form-control:focus {
+	border-color: #5ACBAD;
+}
+
+.member {
+	border-top: 1px solid #1D1F29;
+	padding: 10px 0 10px 0;
+}
+
+.member > i {
+	font-size: 18px;
+	float: right;
+}
+
+#add-member {
+	height: 60px;
+	width: 60px;
+	float: right;
 }
 
 .tile {
-	border: 1px solid black;
-	height: 180px;
+	border: 2px solid #1D1F29;
+	height: 150px;
 }
 
 .tile-content {
-	margin-top: 75px;
+	margin-top: 40px;
 }
-*/
+
+.tile-icon {
+	height: 30px;
+}
+
+.radio-group {
+	margin-top: 10px;
+}

@@ -9,6 +9,10 @@ main {
 	background-color: transparent;
 }
 
+.button-container {
+	margin: 15px 0 15px 0;
+}
+
 button.button-theme {
 	box-shadow: 0 1px 4px #2C2F3D;
 	height: 60px;
