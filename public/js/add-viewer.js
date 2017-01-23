@@ -3,12 +3,12 @@
 // Wait until DOM loads
 $(document).ready(function() {  
 	$('#add-member').click(function() {
-		var emptyInput = checkInput();
-		if (!emptyInput) {
+		if (!emptyInput()) {
 			var memberComponent = getMemberComponent();
 			$('#members').append(memberComponent);
+			updateGreen();
+			$('#submit-btn').prop('disabled', true);
 		}
-		$('#submit-btn').prop('disabled', true);
 	});
 
 	$('#submit-btn').click(function() {
@@ -34,28 +34,46 @@ function getMemberComponent() {
 	var content = 
 		'<div class="member">' +
 			'<i class="fa fa-times"></i>' +
-			'<div class="form-group">' + 
-				'<label for="name">Name</label>' + 
-				'<input type="text" class="form-control" id="name" placeholder="Name" required>' + 
-			'</div>' + 
-			'<div class="form-group">' + 
-				'<label for="name">Email</label>' + 
-				'<input type="email" class="form-control" id="email" placeholder="Email" required>' + 
-			'</div>' + 
+			'<form>' +
+				'<div class="form-group">' +
+					'<label for="name">name</label>' +
+					'<input type="text" class="form-control name" placeholder="Jane" required>' +
+				'</div>' +
+				'<div class="form-group">' +
+					'<label for="email">email</label>' +
+					'<input type="email" class="form-control email" placeholder="jane.doe@gmail.com" required>' +
+				'</div>' +
+			'</form>' +
 		'</div>';
 	return content;
 }
 
 function validateDom() {
-	var emptyInput = checkInput();
-	if (!emptyInput) {
+	if ($('input').length === 0) {
+		updatePurple();
+		$('#submit-btn').prop('disabled', false);
+	} else if (!emptyInput()) {
+		updateGreen();
 		$('#submit-btn').prop('disabled', false);
 	} else {
+		updateGreen();
 		$('#submit-btn').prop('disabled', true);
 	}
 }
 
-function checkInput() {
+function updateGreen() {
+	$('#submit-btn').addClass('green');
+	$('#submit-btn').removeClass('purple');
+	$('#submit-btn').html('save');
+}
+
+function updatePurple() {
+	$('#submit-btn').addClass('purple');
+	$('#submit-btn').removeClass('green');
+	$('#submit-btn').html('cancel');
+}
+
+function emptyInput() {
 	var input = $('input');
 	var emptyInput = false;
 	for (let i = 0; i < input.length; i++) {
@@ -71,9 +89,11 @@ function grabInput() {
 	var arr = [];
 	for (let i = 0; i < fields.length - 1; i += 2) {
 		var obj = {};
-		obj.name = fields[i].value;
-		obj.email = fields[i+1].value;
-		arr.push(obj);
+		if (fields[i].value.length > 0 && fields[i+1].value.length > 0) {
+			obj.name = fields[i].value;
+			obj.email = fields[i+1].value;
+			arr.push(obj);
+		}
 	}
 	return arr;
 }
