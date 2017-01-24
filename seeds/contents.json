@@ -56,13 +56,6 @@
 		"series": true
 	},
 	{
-		"title": "The Walking Dead",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2010",
-		"series": true
-	},
-	{
 		"title": "Black Mirror",
 		"source": "NETFLIX",
 		"popularity": "4",
@@ -74,13 +67,6 @@
 		"source": "NETFLIX",
 		"popularity": "5",
 		"year": "2016",
-		"series": true
-	},
-	{
-		"title": "The Walking Dead",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2010",
 		"series": true
 	},
 	{
@@ -269,13 +255,6 @@
 		"title": "Fantastic Beasts and Where to Find Them",
 		"source": "ONDEMAND",
 		"popularity": "4",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Star Wars",
-		"source": "ONDEMAND",
-		"popularity": "5",
 		"year": "2016",
 		"series": false
 	},
