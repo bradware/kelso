@@ -29,7 +29,7 @@ $(document).ready(function() {
 		validateDom();
 	});
 
-	$(document).on('click', '.fa-times', function(e) {
+	$(document).on('click', '.x-icon', function(e) {
 		$(this)[0].parentElement.remove();
 		validateDom();
 	});
@@ -38,7 +38,7 @@ $(document).ready(function() {
 function getMemberComponent() {
 	var content = 
 		'<div class="member">' +
-			'<i class="fa fa-times"></i>' +
+			'<i class="fa fa-times x-icon"></i>' +
 			'<form>' +
 				'<div class="form-group">' +
 					'<label for="name">name</label>' +

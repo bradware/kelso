@@ -17,13 +17,12 @@ var registerRoute = require('routes/register');
 var loginRoute = require('routes/login');
 var viewerRoute = require('routes/viewer');
 var contentRoute = require('routes/content');
-var groupRoute = require('routes/group');
 var trackerRoute = require('routes/tracker');
 var mainRoutes = require('routes/main');
 
 // Constants
 var port = process.env.PORT || 3001;
-var route_prefix = '/api/';
+var api_route_prefix = '/api/';
 
 // Create our Express application
 var app = express();
@@ -66,12 +65,11 @@ app.use(session(sess));
 app.use(mainRoutes);
 
 // Connect all our api routes with prefix /api
-app.use(route_prefix, registerRoute);
-app.use(route_prefix, loginRoute);
-app.use(route_prefix, viewerRoute);
-app.use(route_prefix, contentRoute);
-app.use(route_prefix, groupRoute);
-app.use(route_prefix, trackerRoute);
+app.use(api_route_prefix, registerRoute);
+app.use(api_route_prefix, loginRoute);
+app.use(api_route_prefix, viewerRoute);
+app.use(api_route_prefix, contentRoute);
+app.use(api_route_prefix, trackerRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {

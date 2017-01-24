@@ -1,49 +1,74 @@
 'use strict';
 
-// Wait until DOM loads
-$(document).ready(function() {  
-	$('#add-member').click(function() {
-		if (!emptyInput()) {
-			var memberComponent = getMemberComponent();
-			$('#members').append(memberComponent);
-			updateGreen();
-			$('#submit-btn').prop('disabled', true);
-		}
-	});
+var otherViewers = null;
 
-	$('#submit-btn').click(function() {
-		var obj = {};
-		obj.viewers = grabInput();
-		$.post('/api/viewer', obj)
-			.fail(function(error) {
-				console.log(error);
+// Wait until DOM loads
+$(document).ready(function() {
+	$.get('/api/viewer')
+		.done(function(res) {
+			otherViewers = res.other_viewers;
+			getOtherViewersComponent();
+		})
+		.fail(function(error) {
+			console.log(error);
+		});
+
+	$('#submit-btn').click(function(e) {
+		if (e.target.innerText === 'done') {
+			var obj = {};
+			obj.otherViewers = otherViewers;
+			$.ajax({
+		    url: '/api/viewer/other-viewers',
+		    type: 'PUT',
+		    data: obj,
+		    success: function(res) {
+        	if (res.redirect) {
+						document.location.href = res.redirect;
+					}
+    		},
+		    error: function(err) {
+		      console.log(err);
+		    }
 			});
+		} else {
+			var newOtherViewer = grabInput();
+			if (newOtherViewer) {
+				var newOtherViewerComponent = renderOtherViewerComponent(newOtherViewer);
+				$('#other-viewers').append(newOtherViewerComponent);
+				updatePurple();
+				otherViewers.push(newOtherViewer);
+			}
+			$('input').val(''); // clear input
+		}
 	});
 
 	$(document).on('blur', 'input', function(e) {
 		validateDom();
 	});
 
-	$(document).on('click', '.fa-times', function(e) {
+	$(document).on('click', '.remove-other-viewer', function(e) {
 		$(this)[0].parentElement.remove();
-		validateDom();
+		var email = $(this)[0].parentElement.id;
+		for (let i = 0; i < otherViewers.length; i++) {
+			if (otherViewers[i].email === email) {
+				otherViewers.splice(i, 1);
+			}
+		}
 	});
 });
 
-function getMemberComponent() {
-	var content = 
-		'<div class="member">' +
-			'<i class="fa fa-times"></i>' +
-			'<form>' +
-				'<div class="form-group">' +
-					'<label for="name">name</label>' +
-					'<input type="text" class="form-control name" placeholder="Jane" required>' +
-				'</div>' +
-				'<div class="form-group">' +
-					'<label for="email">email</label>' +
-					'<input type="email" class="form-control email" placeholder="jane.doe@gmail.com" required>' +
-				'</div>' +
-			'</form>' +
+function getOtherViewersComponent() {
+	for (let i = 0; i < otherViewers.length; i++) {
+		var otherViewerComponent = renderOtherViewerComponent(otherViewers[i]);
+		$('#other-viewers').append(otherViewerComponent);
+	}
+}
+
+function renderOtherViewerComponent(otherViewer) {
+	var content =
+		'<div class="other-viewer col-xs-6" id="' + otherViewer.email + '">' +
+			'<h4 class="other-viewer-title">' + otherViewer.name + '</h4>' +
+			'<i class="fa fa-times x-icon remove-other-viewer"></i>' +
 		'</div>';
 	return content;
 }
@@ -70,7 +95,7 @@ function updateGreen() {
 function updatePurple() {
 	$('#submit-btn').addClass('purple');
 	$('#submit-btn').removeClass('green');
-	$('#submit-btn').html('cancel');
+	$('#submit-btn').html('done');
 }
 
 function emptyInput() {
@@ -84,16 +109,19 @@ function emptyInput() {
 	return false;
 }
 
+function clearInput() {
+	var input = $('input').val('');
+}
+
 function grabInput() {
 	var fields = $('input').find().prevObject;
-	var arr = [];
 	for (let i = 0; i < fields.length - 1; i += 2) {
-		var obj = {};
 		if (fields[i].value.length > 0 && fields[i+1].value.length > 0) {
+			var obj = {};
 			obj.name = fields[i].value;
 			obj.email = fields[i+1].value;
-			arr.push(obj);
+			return obj;
 		}
 	}
-	return arr;
+	return null;
 }

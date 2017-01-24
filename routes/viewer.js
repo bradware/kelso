@@ -50,6 +50,26 @@ router.post('/viewer', middleware.isLoggedIn, function(req, res, next) {
 	});
 });
 
+router.put('/viewer/other-viewers', middleware.isLoggedIn, function(req, res, next) {
+	Viewer.findById(req.session.viewerID, function (err, viewer) {
+		if (err) {
+			next(err);
+		} else {
+			if (viewer && req.body.otherViewers) {
+				viewer.other_viewers = req.body.otherViewers;
+				viewer.save(function(err) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.status(200);
+						res.send({redirect: '/home'});
+					}
+				});
+			}
+		}
+	});
+});
+
 function updateOtherViewersArray(viewer, viewerSmall) {
 	var found = false;
 	for (var i = 0; i < viewer.other_viewers.length; i++) {
@@ -184,6 +204,26 @@ router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 				} else {
 					obj.other_viewers = [];
 					res.send(obj);
+				}
+			});
+		}
+	});
+});
+
+router.delete('/viewer/:otherViewerID', middleware.isLoggedIn, function(req, res, next) {
+	Viewer.findById(req.session.viewerID, function(err, viewer) {
+		if (err) {
+			next(err);
+		} else {
+			for (let i = 0; i < viewer.other_viewers.length; i++) {
+		    if (viewer.other_viewers[i]._id == req.params.otherViewerID) {
+	        viewer.other_viewers.splice(i, 1);
+	        break;
+		    }
+			}
+			viewer.save(function(err) {
+				if (err) {
+					next(err);
 				}
 			});
 		}

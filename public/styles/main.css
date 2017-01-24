@@ -71,14 +71,7 @@ button.button-theme {
 	color: #E8EBF2;
 	font-size: 26px;
 	height: 70px;
-}
-
-button.button-theme:active {
-  opacity: 0.75;
-}
-
-button.button-theme:focus {
-  opacity: 0.75;
+	z-index: 100;
 }
 
 .fixed-bottom {
@@ -123,7 +116,19 @@ label {
 	padding: 10px 0 10px 0;
 }
 
-.member > i {
+.other-viewer {
+	margin-bottom: 10px;
+}
+
+.other-viewer-title {
+	display: inline-block;
+}
+
+.remove-other-viewer {
+	margin-top: 10px;
+}
+
+.x-icon {
 	font-size: 18px;
 	float: right;
 }

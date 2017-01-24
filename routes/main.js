@@ -24,20 +24,17 @@ router.get('/logout', function(req, res, next) {
 		req.session.destroy(function(err) {
 	    if (err) {
 	    	return next(err);
-	  	} else {
-	  		res.redirect('/');
 	  	}
 		});
-	} else {
-		res.redirect('/login');
 	}
+	res.redirect('/');
 });
 
 router.get('/home', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.sendFile(path.join(__dirname, '../public/templates', 'home.html'));
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 });
 
@@ -50,30 +47,50 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.get('/signup-success', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public/templates', 'signup-success.html'));
+	if (isLoggedIn(req)) {
+		res.sendFile(path.join(__dirname, '../public/templates', 'signup-success.html'));
+	} else {
+		res.redirect('/signup');
+	}
 });
 
 router.get('/signup-viewer', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public/templates', 'signup-viewer.html'));
+	if (isLoggedIn(req)) {
+		res.sendFile(path.join(__dirname, '../public/templates', 'signup-viewer.html'));
+	} else {
+		res.redirect('/signup');
+	}
 });
 
 router.get('/signup-content', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public/templates', 'signup-content.html'));
+	if (isLoggedIn(req)) {
+		res.sendFile(path.join(__dirname, '../public/templates', 'signup-content.html'));
+	} else {
+		res.redirect('/signup');
+	}
 });
 
 router.get('/add-viewer', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public/templates', 'add-viewer.html'));
+	if (isLoggedIn(req)) {
+		res.sendFile(path.join(__dirname, '../public/templates', 'add-viewer.html'));
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.get('/add-content', function(req, res, next) {
-	res.sendFile(path.join(__dirname, '../public/templates', 'add-content.html'));
+	if (isLoggedIn(req)) {
+		res.sendFile(path.join(__dirname, '../public/templates', 'add-content.html'));
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.get('/watch', function(req, res, next) {
 	if (isLoggedIn(req)) {
 		res.sendFile(path.join(__dirname, '../public/templates', 'watch.html'));
 	} else {
-		res.redirect('/login');
+		res.redirect('/');
 	}
 });
 
