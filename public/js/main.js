@@ -6,5 +6,9 @@ $(document).ready(function() {
 });
 
 function goBack() {
-  window.history.back();
+	if (document.referrer.indexOf(window.location.host) !== -1) { 
+		history.go(-1); 
+	} else { 
+		window.location.href = '/'; 
+	}
 }
