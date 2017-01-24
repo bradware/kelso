@@ -16,7 +16,6 @@ $(document).ready(function() {
 	$('#submit-btn').click(function(e) {
 		if (e.target.innerText === 'done') {
 			var obj = {};
-			console.log(otherViewers);
 			obj.otherViewers = otherViewers;
 			$.ajax({
 		    url: '/api/viewer/other-viewers',
@@ -34,10 +33,9 @@ $(document).ready(function() {
 		} else {
 			var newOtherViewer = grabInput();
 			if (newOtherViewer) {
-				var newOtherViewerComponent = renderOtherViewerComponent(newOtherViewer);
-				$('#other-viewers').append(newOtherViewerComponent);
-				updatePurple();
 				otherViewers.push(newOtherViewer);
+				updatePurple();
+				$('#other-viewers').append(renderOtherViewerComponent(newOtherViewer));
 			}
 			$('input').val(''); // clear input
 		}
@@ -60,8 +58,7 @@ $(document).ready(function() {
 
 function getOtherViewersComponent() {
 	for (let i = 0; i < otherViewers.length; i++) {
-		var otherViewerComponent = renderOtherViewerComponent(otherViewers[i]);
-		$('#other-viewers').append(otherViewerComponent);
+		$('#other-viewers').append(renderOtherViewerComponent(otherViewers[i]));
 	}
 }
 
