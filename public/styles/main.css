@@ -137,6 +137,11 @@ label {
 	z-index: 10;
 }
 
+#signup-success {
+	margin: 20% 0 20% 0;
+	width: 70%;
+}
+
 .tile {
 	border: 2px solid #1D1F29;
 	height: 150px;
