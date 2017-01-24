@@ -16,6 +16,7 @@ $(document).ready(function() {
 	$('#submit-btn').click(function(e) {
 		if (e.target.innerText === 'done') {
 			var obj = {};
+			console.log(otherViewers);
 			obj.otherViewers = otherViewers;
 			$.ajax({
 		    url: '/api/viewer/other-viewers',

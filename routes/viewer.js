@@ -55,18 +55,34 @@ router.put('/viewer/other-viewers', middleware.isLoggedIn, function(req, res, ne
 		if (err) {
 			next(err);
 		} else {
-			if (viewer && req.body.otherViewers) {
-				viewer.other_viewers = req.body.otherViewers;
-				viewer.save(function(err) {
-					if (err) {
-						console.log(err);
-					} else {
-						res.status(200);
-						res.send({redirect: '/home'});
-					}
-				});
+			if (!req.body.otherViewers) {
+				req.body.otherViewers = [];
 			}
+			Viewer.findByIdAndUpdate(viewer._id, {other_viewers: []}, {new: true}, function(err, viewer) {
+				if (err) {
+					return next(err);
+				} else {
+					var viewerSmall = createViewerSmall(viewer);
+					req.body.otherViewers.forEach(function(obj) {
+						otherViewerExists(obj, viewerSmall, function(err, otherViewer) {
+							if (err) {
+								next(err);
+							} else if (!otherViewer) {
+								otherViewer = createNewViewer(obj, viewerSmall);
+							}
+							var otherViewerSmall = createViewerSmall(otherViewer);
+							Viewer.findByIdAndUpdate(viewer._id, {$push:{other_viewers: otherViewerSmall}}, {new: true}, function(err) {
+								if (err) {
+									return next(err);
+								}
+							});
+						});
+					});
+				}
+			});
 		}
+		res.status(200);
+		res.send({redirect: '/home'});
 	});
 });
 
@@ -204,26 +220,6 @@ router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 				} else {
 					obj.other_viewers = [];
 					res.send(obj);
-				}
-			});
-		}
-	});
-});
-
-router.delete('/viewer/:otherViewerID', middleware.isLoggedIn, function(req, res, next) {
-	Viewer.findById(req.session.viewerID, function(err, viewer) {
-		if (err) {
-			next(err);
-		} else {
-			for (let i = 0; i < viewer.other_viewers.length; i++) {
-		    if (viewer.other_viewers[i]._id == req.params.otherViewerID) {
-	        viewer.other_viewers.splice(i, 1);
-	        break;
-		    }
-			}
-			viewer.save(function(err) {
-				if (err) {
-					next(err);
 				}
 			});
 		}
