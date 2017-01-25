@@ -1,520 +1,513 @@
 [
-	{
-		"title": "A Series of Unfortunate Events",
-		"source": "NETFLIX",
-		"popularity": "5",
-		"year": "2017",
-		"series": true
-	},
-	{
-		"title": "Sherlock",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2010",
-		"series": true
-	},
-	{
-		"title": "Taboo",
-		"source": "CABLE",
-		"popularity": "2",
-		"year": "2017",
-		"series": true
-	},
-	{
-		"title": "Vikings",
-		"source": "CABLE",
-		"popularity": "5",
-		"year": "2013",
-		"series": true
-	},
-	{
-		"title": "Game of Thrones",
-		"source": "HBO",
-		"popularity": "5",
-		"year": "2011",
-		"series": true
-	},
-	{
-		"title": "This is Us",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2016",
-		"series": true
-	},
-	{
-		"title": "Westworld",
-		"source": "HBO",
-		"popularity": "5",
-		"year": "2016",
-		"series": true
-	},
-	{
-		"title": "The Walking Dead",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2010",
-		"series": true
-	},
-	{
-		"title": "Black Mirror",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2011",
-		"series": true
-	},
-	{
-		"title": "Stranger Things",
-		"source": "NETFLIX",
-		"popularity": "5",
-		"year": "2016",
-		"series": true
-	},
-	{
-		"title": "The Big Bang Theory",
-		"source": "CABLE",
-		"popularity": "3",
-		"year": "2007",
-		"series": true
-	},
-	{
-		"title": "Grey's Anatomy",
-		"source": "CABLE",
-		"popularity": "3",
-		"year": "2005",
-		"series": true
-	},
-	{
-		"title": "The Vampire Diaries",
-		"source": "CABLE",
-		"popularity": "2",
-		"year": "2009",
-		"series": true
-	},
-	{
-		"title": "It's Always Sunny in Philadelphia",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2005",
-		"series": true
-	},
-	{
-		"title": "Gilmore Girls",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2000",
-		"series": true
-	},
-	{
-		"title": "Breaking Bad",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2008",
-		"series": true
-	},
-	{
-		"title": "House of Cards",
-		"source": "NETFLIX",
-		"popularity": "5",
-		"year": "2013",
-		"series": true
-	},
-	{
-		"title": "NCIS",
-		"source": "CABLE",
-		"popularity": "3",
-		"year": "2003",
-		"series": true
-	},
-	{
-		"title": "Modern Family",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2009",
-		"series": true
-	},
-	{
-		"title": "Friends",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1994",
-		"series": true
-	},
-	{
-		"title": "The Office",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2005",
-		"series": true
-	},
-	{
-		"title": "Orange Is the New Black",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2013",
-		"series": true
-	},
-	{
-		"title": "How I Met Your Mother",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2005",
-		"series": true
-	},
-	{
-		"title": "Narcos",
-		"source": "NETFLIX",
-		"popularity": "5",
-		"year": "2015",
-		"series": true
-	},
-	{
-		"title": "Mr. Robot",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2015",
-		"series": true
-	},
-	{
-		"title": "New Girl",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2011",
-		"series": true
-	},
-	{
-		"title": "Dexter",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2006",
-		"series": true
-	},
-	{
-		"title": "LOST",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "2004",
-		"series": true
-	},
-	{
-		"title": "Atlanta",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2016",
-		"series": true
-	},
-	{
-		"title": "House",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2004",
-		"series": true
-	},
-	{
-		"title": "Nashville",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2012",
-		"series": true
-	},
-	{
-		"title": "La La Land",
-		"source": "ONDEMAND",
-		"popularity": "5",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Split",
-		"source": "ONDEMAND",
-		"popularity": "4",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Arrival",
-		"source": "ONDEMAND",
-		"popularity": "4",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Star Wars",
-		"source": "ONDEMAND",
-		"popularity": "5",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Passengers",
-		"source": "ONDEMAND",
-		"popularity": "3",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Fantastic Beasts and Where to Find Them",
-		"source": "ONDEMAND",
-		"popularity": "4",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "The Girl on the Train",
-		"source": "ONDEMAND",
-		"popularity": "2",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Fifty Shades of Grey",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "2014",
-		"series": false
-	},
-	{
-		"title": "Suicide Squad",
-		"source": "ONDEMAND",
-		"popularity": "5",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "The Shawshank Redemption",
-		"source": "NETFLIX",
-		"popularity": "5",
-		"year": "1994",
-		"series": false
-	},
-	{
-		"title": "The Godfather",
-		"source": "HBO",
-		"popularity": "4",
-		"year": "1972",
-		"series": false
-	},
-	{
-		"title": "Batman",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2008",
-		"series": false
-	},
-	{
-		"title": "The Lord of the Rings",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "2000",
-		"series": false
-	},
-	{
-		"title": "Fight Club",
-		"source": "HBO",
-		"popularity": "4",
-		"year": "1999",
-		"series": false
-	},
-	{
-		"title": "Forrest Gump",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "1994",
-		"series": false
-	},
-	{
-		"title": "Inception",
-		"source": "HBO",
-		"popularity": "4",
-		"year": "2010",
-		"series": false
-	},
-	{
-		"title": "The Silence of the Lambs",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "1991",
-		"series": false
-	},
-	{
-		"title": "Saving Private Ryan",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1998",
-		"series": false
-	},
-	{
-		"title": "Interstellar",
-		"source": "HBO",
-		"popularity": "4",
-		"year": "2014",
-		"series": false
-	},
-	{
-		"title": "Indiana Jones",
-		"source": "HBO",
-		"popularity": "2",
-		"year": "1980",
-		"series": false
-	},
-	{
-		"title": "Back to the Future",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "1985",
-		"series": false
-	},
-	{
-		"title": "Gladiator",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2000",
-		"series": false
-	},
-	{
-		"title": "Back to the Future",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "1985",
-		"series": false
-	},
-	{
-		"title": "Stand by Me",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "1986",
-		"series": false
-	},
-	{
-		"title": "The Sixth Sense",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1999",
-		"series": false
-	},
-	{
-		"title": "The Big Lebowski",
-		"source": "HBO",
-		"popularity": "3",
-		"year": "1998",
-		"series": false
-	},
-	{
-		"title": "The Wolf of Wall Street",
-		"source": "HBO",
-		"popularity": "3",
-		"year": "2013",
-		"series": false
-	},
-	{
-		"title": "A Beautiful Mind",
-		"source": "Netflix",
-		"popularity": "4",
-		"year": "2001",
-		"series": false
-	},
-	{
-		"title": "Toy Story",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "1995",
-		"series": false
-	},
-	{
-		"title": "Finding Nemo",
-		"source": "CABLE",
-		"popularity": "3",
-		"year": "2001",
-		"series": false
-	},
-	{
-		"title": "Finding Dory",
-		"source": "ONDEMAND",
-		"popularity": "4",
-		"year": "2016",
-		"series": false
-	},
-	{
-		"title": "Up",
-		"source": "Netflix",
-		"popularity": "2",
-		"year": "2009",
-		"series": false
-	},
-	{
-		"title": "Inside Out",
-		"source": "ONDEMAND",
-		"popularity": "4",
-		"year": "2015",
-		"series": false
-	},
-	{
-		"title": "Jurassic Park",
-		"source": "CABLE",
-		"popularity": "3",
-		"year": "1992",
-		"series": false
-	},
-	{
-		"title": "Harry Potter",
-		"source": "CABLE",
-		"popularity": "4",
-		"year": "2000",
-		"series": false
-	},
-	{
-		"title": "Good Will Hunting",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1997",
-		"series": false
-	},
-	{
-		"title": "The Princess Bride",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "1987",
-		"series": false
-	},
-	{
-		"title": "Donnie Darko",
-		"source": "NETFLIX",
-		"popularity": "2",
-		"year": "2001",
-		"series": false
-	},
-	{
-		"title": "Monsters, Inc.",
-		"source": "NETFLIX",
-		"popularity": "3",
-		"year": "2001",
-		"series": false
-	},
-	{
-		"title": "The Titanic",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1997",
-		"series": false
-	},
-	{
-		"title": "Spotlight",
-		"source": "ONDEMAND",
-		"popularity": "3",
-		"year": "2015",
-		"series": false
-	},
-	{
-		"title": "American Beauty",
-		"source": "NETFLIX",
-		"popularity": "4",
-		"year": "1999",
-		"series": false
-	},
-	{
-		"title": "Birdman",
-		"source": "ONDEMAND",
-		"popularity": "3",
-		"year": "2014",
-		"series": false
-	}
+  {
+    "title": "A Series of Unfortunate Events",
+    "source": "NETFLIX",
+    "popularity": "5",
+    "year": "2017",
+    "series": true
+  },
+  {
+    "title": "Sherlock",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2010",
+    "series": true
+  },
+  {
+    "title": "Taboo",
+    "source": "CABLE",
+    "popularity": "2",
+    "year": "2017",
+    "series": true
+  },
+  {
+    "title": "Vikings",
+    "source": "CABLE",
+    "popularity": "5",
+    "year": "2013",
+    "series": true
+  },
+  {
+    "title": "Game of Thrones",
+    "source": "HBO",
+    "popularity": "5",
+    "year": "2011",
+    "series": true
+  },
+  {
+    "title": "This is Us",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2016",
+    "series": true
+  },
+  {
+    "title": "Westworld",
+    "source": "HBO",
+    "popularity": "5",
+    "year": "2016",
+    "series": true
+  },
+  {
+    "title": "The Walking Dead",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2010",
+    "series": true
+  },
+  {
+    "title": "Black Mirror",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2011",
+    "series": true
+  },
+  {
+    "title": "Stranger Things",
+    "source": "NETFLIX",
+    "popularity": "5",
+    "year": "2016",
+    "series": true
+  },
+  {
+    "title": "The Big Bang Theory",
+    "source": "CABLE",
+    "popularity": "3",
+    "year": "2007",
+    "series": true
+  },
+  {
+    "title": "Grey's Anatomy",
+    "source": "CABLE",
+    "popularity": "3",
+    "year": "2005",
+    "series": true
+  },
+  {
+    "title": "The Vampire Diaries",
+    "source": "CABLE",
+    "popularity": "2",
+    "year": "2009",
+    "series": true
+  },
+  {
+    "title": "It's Always Sunny in Philadelphia",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2005",
+    "series": true
+  },
+  {
+    "title": "Gilmore Girls",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2000",
+    "series": true
+  },
+  {
+    "title": "Breaking Bad",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2008",
+    "series": true
+  },
+  {
+    "title": "House of Cards",
+    "source": "NETFLIX",
+    "popularity": "5",
+    "year": "2013",
+    "series": true
+  },
+  {
+    "title": "NCIS",
+    "source": "CABLE",
+    "popularity": "3",
+    "year": "2003",
+    "series": true
+  },
+  {
+    "title": "Modern Family",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2009",
+    "series": true
+  },
+  {
+    "title": "Friends",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1994",
+    "series": true
+  },
+  {
+    "title": "The Office",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2005",
+    "series": true
+  },
+  {
+    "title": "Orange Is the New Black",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2013",
+    "series": true
+  },
+  {
+    "title": "How I Met Your Mother",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2005",
+    "series": true
+  },
+  {
+    "title": "Narcos",
+    "source": "NETFLIX",
+    "popularity": "5",
+    "year": "2015",
+    "series": true
+  },
+  {
+    "title": "Mr. Robot",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2015",
+    "series": true
+  },
+  {
+    "title": "New Girl",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2011",
+    "series": true
+  },
+  {
+    "title": "Dexter",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2006",
+    "series": true
+  },
+  {
+    "title": "LOST",
+    "source": "NETFLIX",
+    "popularity": "2",
+    "year": "2004",
+    "series": true
+  },
+  {
+    "title": "Atlanta",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2016",
+    "series": true
+  },
+  {
+    "title": "House",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2004",
+    "series": true
+  },
+  {
+    "title": "Nashville",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2012",
+    "series": true
+  },
+  {
+    "title": "La La Land",
+    "source": "ONDEMAND",
+    "popularity": "5",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Split",
+    "source": "ONDEMAND",
+    "popularity": "4",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Arrival",
+    "source": "ONDEMAND",
+    "popularity": "4",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Star Wars",
+    "source": "ONDEMAND",
+    "popularity": "5",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Passengers",
+    "source": "ONDEMAND",
+    "popularity": "3",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Fantastic Beasts and Where to Find Them",
+    "source": "ONDEMAND",
+    "popularity": "4",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "The Girl on the Train",
+    "source": "ONDEMAND",
+    "popularity": "2",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Fifty Shades of Grey",
+    "source": "NETFLIX",
+    "popularity": "2",
+    "year": "2014",
+    "series": false
+  },
+  {
+    "title": "Suicide Squad",
+    "source": "ONDEMAND",
+    "popularity": "5",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "The Shawshank Redemption",
+    "source": "NETFLIX",
+    "popularity": "5",
+    "year": "1994",
+    "series": false
+  },
+  {
+    "title": "The Godfather",
+    "source": "HBO",
+    "popularity": "4",
+    "year": "1972",
+    "series": false
+  },
+  {
+    "title": "Batman",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2008",
+    "series": false
+  },
+  {
+    "title": "The Lord of the Rings",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "2000",
+    "series": false
+  },
+  {
+    "title": "Fight Club",
+    "source": "HBO",
+    "popularity": "4",
+    "year": "1999",
+    "series": false
+  },
+  {
+    "title": "Forrest Gump",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "1994",
+    "series": false
+  },
+  {
+    "title": "Inception",
+    "source": "HBO",
+    "popularity": "4",
+    "year": "2010",
+    "series": false
+  },
+  {
+    "title": "The Silence of the Lambs",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "1991",
+    "series": false
+  },
+  {
+    "title": "Saving Private Ryan",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1998",
+    "series": false
+  },
+  {
+    "title": "Interstellar",
+    "source": "HBO",
+    "popularity": "4",
+    "year": "2014",
+    "series": false
+  },
+  {
+    "title": "Indiana Jones",
+    "source": "HBO",
+    "popularity": "2",
+    "year": "1980",
+    "series": false
+  },
+  {
+    "title": "Back to the Future",
+    "source": "NETFLIX",
+    "popularity": "2",
+    "year": "1985",
+    "series": false
+  },
+  {
+    "title": "Gladiator",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2000",
+    "series": false
+  },
+  {
+    "title": "Stand by Me",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "1986",
+    "series": false
+  },
+  {
+    "title": "The Sixth Sense",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1999",
+    "series": false
+  },
+  {
+    "title": "The Big Lebowski",
+    "source": "HBO",
+    "popularity": "3",
+    "year": "1998",
+    "series": false
+  },
+  {
+    "title": "The Wolf of Wall Street",
+    "source": "HBO",
+    "popularity": "3",
+    "year": "2013",
+    "series": false
+  },
+  {
+    "title": "A Beautiful Mind",
+    "source": "Netflix",
+    "popularity": "4",
+    "year": "2001",
+    "series": false
+  },
+  {
+    "title": "Toy Story",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "1995",
+    "series": false
+  },
+  {
+    "title": "Finding Nemo",
+    "source": "CABLE",
+    "popularity": "3",
+    "year": "2001",
+    "series": false
+  },
+  {
+    "title": "Finding Dory",
+    "source": "ONDEMAND",
+    "popularity": "4",
+    "year": "2016",
+    "series": false
+  },
+  {
+    "title": "Up",
+    "source": "Netflix",
+    "popularity": "2",
+    "year": "2009",
+    "series": false
+  },
+  {
+    "title": "Inside Out",
+    "source": "ONDEMAND",
+    "popularity": "4",
+    "year": "2015",
+    "series": false
+  },
+  {
+    "title": "Jurassic Park",
+    "source": "CABLE",
+    "popularity": "3",
+    "year": "1992",
+    "series": false
+  },
+  {
+    "title": "Harry Potter",
+    "source": "CABLE",
+    "popularity": "4",
+    "year": "2000",
+    "series": false
+  },
+  {
+    "title": "Good Will Hunting",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1997",
+    "series": false
+  },
+  {
+    "title": "The Princess Bride",
+    "source": "NETFLIX",
+    "popularity": "2",
+    "year": "1987",
+    "series": false
+  },
+  {
+    "title": "Donnie Darko",
+    "source": "NETFLIX",
+    "popularity": "2",
+    "year": "2001",
+    "series": false
+  },
+  {
+    "title": "Monsters, Inc.",
+    "source": "NETFLIX",
+    "popularity": "3",
+    "year": "2001",
+    "series": false
+  },
+  {
+    "title": "The Titanic",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1997",
+    "series": false
+  },
+  {
+    "title": "Spotlight",
+    "source": "ONDEMAND",
+    "popularity": "3",
+    "year": "2015",
+    "series": false
+  },
+  {
+    "title": "American Beauty",
+    "source": "NETFLIX",
+    "popularity": "4",
+    "year": "1999",
+    "series": false
+  },
+  {
+    "title": "Birdman",
+    "source": "ONDEMAND",
+    "popularity": "3",
+    "year": "2014",
+    "series": false
+  }
 ]

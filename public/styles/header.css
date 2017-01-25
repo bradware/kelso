@@ -1,24 +1,24 @@
 .navbar {
-	height: 45px;
+  height: 45px;
 }
 
 .navbar-default {
-	background-color: #5ACBAD;
-	border-color: #2C2F3D;
+  background-color: #5ACBAD;
+  border-color: #2C2F3D;
 }
 
 .logo-brand {
-	position: absolute;
-	left: 50%;
-	margin-left: -29px;  /* 50% of your logo width */
-	margin-top: 8px;
-	display: block;
-	height: 35px;
-	width: 57px;
+  position: absolute;
+  left: 50%;
+  margin-left: -29px;  /* 50% of your logo width */
+  margin-top: 8px;
+  display: block;
+  height: 35px;
+  width: 57px;
 }
 
 #logout-logo {
-	height: 52px;
-	width: 52px;
-	float: right;
+  height: 52px;
+  width: 52px;
+  float: right;
 }

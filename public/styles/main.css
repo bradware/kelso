@@ -1,86 +1,86 @@
 html, body {
-	background-color: #1D1F29; /* Dark Gray */
-	color: #E8EBF2; /* Light Gray */
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+  background-color: #1D1F29; /* Dark Gray */
+  color: #E8EBF2; /* Light Gray */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   margin: 0;
   min-height: 100%;
   overflow-x: hidden;
 }
 
 main {
-	background-color: #2C2F3D; /* Medium Gray */
-	margin-top: 60px;
+  background-color: #2C2F3D; /* Medium Gray */
+  margin-top: 60px;
 }
 
 .wrapper {
-	overflow-y: scroll;
-	padding: 0 10% 0 10%;
+  overflow-y: scroll;
+  padding: 0 10% 0 10%;
 }
 
 a:link {
-	color: inherit;
+  color: inherit;
   text-decoration: none;
 }
 
 a:visited {
-	color: inherit;
+  color: inherit;
   text-decoration: none;
 }
 
 a:hover {
-	color: inherit;
+  color: inherit;
   text-decoration: none;
 }
 
 a:active {
-	color: inherit;
+  color: inherit;
   text-decoration: none;
 }
 
 h2 {
-	font-size: 22px;
+  font-size: 22px;
 }
 
 .light-font {
-	font-weight: 300;
+  font-weight: 300;
 }
 
 .page-title {
-	margin: 10px 0 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 .page-title > p {
-	font-weight: 300;
+  font-weight: 300;
 }
 
 #home-title {
-	background-color: #1D1F29;
-	width: 100%;
-	padding-bottom: 5px;
+  background-color: #1D1F29;
+  width: 100%;
+  padding-bottom: 5px;
 }
 
 .page-content {
-	margin: 20px 0 40px 0;
+  margin: 20px 0 40px 0;
 }
 
 .green {
-	background-color: #5ACBAD;
+  background-color: #5ACBAD;
 }
 
 .purple {
-	background-color: #727DF0;
+  background-color: #727DF0;
 }
 
 .light-gray {
-	color: #E8EBF2;
+  color: #E8EBF2;
 }
 
 button.button-theme {
-	border-radius: 0;
-	color: #E8EBF2;
-	font-size: 26px;
-	height: 70px;
-	z-index: 100;
+  border-radius: 0;
+  color: #E8EBF2;
+  font-size: 26px;
+  height: 70px;
+  z-index: 100;
 }
 
 .fixed-bottom {
@@ -90,116 +90,116 @@ button.button-theme {
 }
 
 .bottom-padding {
-	height: 100px;
-	background-color: #1D1F29;
-	position: relative;
+  height: 100px;
+  background-color: #1D1F29;
+  position: relative;
   width: 100vw;
   left: calc(-50vw + 50%);
 }
 
 /*
-	Form & Signup
+  Form & Signup
 */
 
 form {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 label {
-	color: #CCC;
-	font-weight: 400;
+  color: #CCC;
+  font-weight: 400;
 }
 
 .form-control {
-	background-color: transparent;
-	border-radius: 0;
-	color: #E8EBF2;
+  background-color: transparent;
+  border-radius: 0;
+  color: #E8EBF2;
 }
 
 .form-control:focus {
-	border-color: #5ACBAD;
+  border-color: #5ACBAD;
 }
 
 .member {
-	border-top: 1px solid #1D1F29;
-	padding: 10px 0 10px 0;
+  border-top: 1px solid #1D1F29;
+  padding: 10px 0 10px 0;
 }
 
 #other-viewers.row {
-	margin: 0;
+  margin: 0;
 }
 
 .other-viewer {
-	border: 1px solid #CCC;
-	margin-bottom: 10px;
+  border: 1px solid #CCC;
+  margin-bottom: 10px;
 }
 
 .other-viewer-title {
-	display: inline-block;
+  display: inline-block;
 }
 
 .remove-other-viewer {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 .x-icon {
-	font-size: 18px;
-	float: right;
+  font-size: 18px;
+  float: right;
 }
 
 #add-member {
-	height: 60px;
-	width: 60px;
-	float: right;
-	margin-bottom: -30px;
-	position: relative;
-	z-index: 10;
+  height: 60px;
+  width: 60px;
+  float: right;
+  margin-bottom: -30px;
+  position: relative;
+  z-index: 10;
 }
 
 #signup-success {
-	margin: 20% 0 20% 0;
-	width: 70%;
+  margin: 20% 0 20% 0;
+  width: 70%;
 }
 
 .tile {
-	border: 2px solid #1D1F29;
-	height: 150px;
+  border: 2px solid #1D1F29;
+  height: 150px;
 }
 
 .tile-content {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
 .tile-icon {
-	height: 30px;
+  height: 30px;
 }
 
 .radio-group {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 #search-btn {
-	border-radius: 0;
-	color: #E8EBF2;
+  border-radius: 0;
+  color: #E8EBF2;
 }
 
 #content-results {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .search-bar {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .checkbox label {
-	font-weight: 300;
+  font-weight: 300;
 }
 
 #tooltip {
-	background-color: #1D1F29;
-	border: 2px solid #727DF0;
-	padding: 10px;
-	width: 120px;
-	position: absolute;
+  background-color: #1D1F29;
+  border: 2px solid #727DF0;
+  padding: 10px;
+  width: 120px;
+  position: absolute;
   z-index: 100;
 }

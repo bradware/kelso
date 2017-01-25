@@ -8,14 +8,14 @@ var middleware = require('middleware');
 var Tracker = require('models/tracker');
 
 router.post('/tracker', middleware.isLoggedIn, function(req, res, next) {
-	var tracker = new Tracker(req.body);
-	tracker.save(function(err, newTracker) {
-		if (err) {
-			return next(err);
-		} else {
-			res.send({redirect: '/home'});
-		}
-	});
+  var tracker = new Tracker(req.body);
+  tracker.save(function(err, newTracker) {
+    if (err) {
+      return next(err);
+    } else {
+      res.send({redirect: '/home'});
+    }
+  });
 });
 
 module.exports = router;
