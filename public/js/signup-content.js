@@ -1,16 +1,87 @@
 'use strict';
 
+// lists
 var contents = null;
 var recommended = null;
 var viewers = null;
-var viewingMap = null; // built after API call
+
+// data map for API POST
+var contentViewerMap = {}; 
+
+// helper maps
 var contentMap = null; // built after API call
-var viewerMap = {};
+var viewerMap = null; // built after API call
+
+// curr tile selected
+var currTile = null;
 
 // Wait until DOM loads
 $(document).ready(function() {
-	$('#tooltip').hide();
+	initDataAndDom();
 
+	$(document).on('keydown', 'input', function(e) {
+		$('.tile').hide();
+		if ($(this)[0].value.length === 0) {
+			showRecommendedResults(recommended);
+		} else if ($(this)[0].value.length > 1) {
+			searchContents($(this)[0].value);
+		}
+	});	
+	
+	// click touchend
+	$(document).on('click', '.tile', function(e) {
+		if ($('#tooltip').is(':visible') && currTile === e.target.id) {
+			return;
+		} else {
+			if (!currTile) {
+				currTile = e.target.id;
+			}
+			saveContentViewers(currTile, getCheckboxes());
+			currTile = e.target.id;
+			$('#tooltip').fadeIn().css(({left: e.pageX - 50, top: e.pageY - 75}));
+			populateCheckboxes();
+		}
+	});
+
+	// click touchend
+	$(document).on('click', 'body', function(e) {
+		if ($(e.target).hasClass('tile') || $(e.target).parents('#tooltip').length > 0) {
+			return;
+		} else {
+			saveContentViewers(currTile, getCheckboxes());
+			$('#tooltip').fadeOut();
+		}
+	});
+
+	// click touchend
+	$('#submit-btn').on('click', function() {
+		for (var contentID in contentViewerMap) {
+			var currContent = contentMap[contentID];
+			for (let i = 0; i < contentViewerMap[contentID].length; i++) {
+				var currViewer = viewerMap[contentViewerMap[contentID][i]];
+				if (updateViewerContent(currContent, currViewer)) {
+					currViewer.content.push(createContentSmall(currContent));
+				}
+			}
+		}
+		
+		var obj = {};
+		obj.viewers = viewers;
+		$.ajax({
+	    url: '/api/viewer/content',
+	    type: 'PUT',
+	    data: obj,
+	    success: function(res) {
+				document.location.href = '/signup-success';
+  		},
+	    error: function(err) {
+	      console.log(err);
+	    }
+		});
+	});
+});
+
+function initDataAndDom() {
 	$.get('/api/content/all')
 		.done(function(res) {
 			contents = res.contents;
@@ -18,6 +89,7 @@ $(document).ready(function() {
 			getContentResults(contents);
 			
 			$('.tile').hide();
+			$('.tile-content').css('margin-top', '55px');
 			
 			recommended = res.recs;
 			showRecommendedResults(recommended);
@@ -29,40 +101,42 @@ $(document).ready(function() {
 	$.get('/api/viewers')
 		.done(function(res) {
 			viewers = res;
-			viewingMap = buildMap(viewers);
+			viewerMap = buildMap(viewers);
 			$('#content-results').prepend(getTooltip(viewers));
 			$('#tooltip').hide();
 		})
 		.fail(function(error) {
 			console.log(error);
 		});
+}
 
-	$(document).on('keydown', 'input', function(e) {
-		$('.tile').hide();
-		if ($(this)[0].value.length === 0) {
-			showRecommendedResults(recommended);
-		} else if ($(this)[0].value.length > 1) {
-			searchContents($(this)[0].value);
+function updateViewerContent(currContent, currViewer) {
+	for (let i = 0; i < currViewer.content.length; i++) {
+		if (currViewer.content[i]._id === currContent._id) {
+			return false;
 		}
-	});	
-	
-	$(document).on('click', 'body', function(e) {
-		if ($(e.target).hasClass('tile')) {
-			$('#tooltip').fadeIn().css(({left: e.pageX, top: e.pageY - 50}));
-		} else {
-			$('#tooltip').fadeOut();
-		}
-	});
+	}
+	return true;
+}
 
-	$('#save').click(function() {
-		clearCheckboxes();
-	});
+function createContentSmall(content) {
+	var obj = {};
+	obj._id = content._id;
+	obj.title = content.title;
+	return obj;
+}
 
-	$('#cancel').click(function() {
-		clearCheckboxes();
-	});
-
-});
+function saveContentViewers(contentID, viewerIDs) {
+	if (viewerIDs.length === 0) {
+		contentViewerMap[contentID] = [];
+		$('#'+contentID).find('p')[0].innerHTML = '';
+		$('#'+contentID).css('background-color', '#2C2F3D');
+	} else {
+		contentViewerMap[contentID] = viewerIDs;
+		$('#'+contentID).find('p')[0].innerHTML = viewerIDs.length + ' watching';
+		$('#'+contentID).css('background-color', '#727DF0');
+	}
+}
 
 function getTooltip(arr) {
 	var start = '<div id="tooltip"><h4 class="text-center">Who?</h4>';
@@ -76,7 +150,7 @@ function getTooltip(arr) {
 
 function renderTooltipContent(viewer) {
 	var start = '<div class="checkbox"><label>';
-	var middle = '<input type="checkbox" id="' + viewer._id + 'value="' + viewer.name + '">' + viewer.name;
+	var middle = '<input type="checkbox" id="' + viewer._id + '" value="' + viewer.name + '">' + viewer.name;
 	var end = '</label></div>';
 	return start + middle + end;
 }
@@ -107,6 +181,7 @@ function renderContentResult(res) {
 		'<div class="col-xs-6 text-center tile" id="' + res._id + '">' +
 			'<div class="tile-content">' +
 				'<h4>' + res.title +'</h4>' +
+				'<p></p>' +
 			'</div>' +
 		'</div>';
 	return content;
@@ -120,12 +195,32 @@ function searchContents(str) {
 	}
 }
 
+function populateCheckboxes() {
+	clearCheckboxes();
+	var viewers = contentViewerMap[currTile];
+	if (viewers && viewers.length > 0) {
+		for (let i = 0; i < viewers.length; i++) {
+			$('#'+viewers[i])[0].checked = true;
+		}
+	}
+}
+
 function clearCheckboxes() {
 	var checkboxes = $('input:checkbox');
-	var names = [];
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].checked = false;
 	}
+}
+
+function getCheckboxes() {
+	var checkboxes = $('input:checkbox');
+	var ids = [];
+	for (let i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			ids.push(checkboxes[i].id);
+		}
+	}
+	return ids;
 }
 
 function updateModalDom(arr) {

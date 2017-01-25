@@ -175,6 +175,18 @@ router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
 	});
 });
 
+router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
+	for (let i = 0; i < req.body.viewers.length; i++) {
+		Viewer.findByIdAndUpdate(req.body.viewers[i]._id, req.body.viewers[i], {new: true}, function(err, viewer) {
+			if (err) {
+				next(err);
+			}
+		});	
+	}
+	res.status(200);
+	res.send();
+});
+
 function updateContentArray(content, title) {
 	var found = false;
 	for (var i = 0; i < content.length; i++) {
