@@ -34,7 +34,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
 db.on('error', function(err) { 
-	console.error('Connection error to Moola DB:', err); 
+  console.error('Connection error to Moola DB:', err); 
 });
 
 // Middleware setup
@@ -50,10 +50,10 @@ app.use(express.static('public'));
 // Session & Token management setup
 var sess = {
   secret: 'kelso-secret-key',
-	resave: true,
-	saveUninitialized: false,
-	store: new MongoStore({mongooseConnection: db}),
-	cookie: {maxAge: 3600000} // 60 minute expiration for session
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({mongooseConnection: db}),
+  cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
 if (app.get('env') === 'production') {
   app.set('trust proxy', 1) // trust first proxy
@@ -73,17 +73,17 @@ app.use(api_route_prefix, trackerRoute);
 
 // Catch unused requests
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // Error handler, has to take in 4 params
 app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.send(err.message);
+  res.status(err.status || 500);
+  res.send(err.message);
 });
 
 app.listen(port, function() { 
-	console.log('Server is running on port', port); 
+  console.log('Server is running on port', port); 
 });
