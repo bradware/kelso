@@ -4,6 +4,7 @@ html, body {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   margin: 0;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 main {
@@ -64,6 +65,10 @@ h2 {
 
 .purple {
 	background-color: #727DF0;
+}
+
+.light-gray {
+	color: #E8EBF2;
 }
 
 button.button-theme {
@@ -172,6 +177,14 @@ label {
 #search-btn {
 	border-radius: 0;
 	color: #E8EBF2;
+}
+
+#content-results {
+	margin-top: 20px;
+}
+
+.search-bar {
+	margin-top: 20px;
 }
 
 #tooltip {

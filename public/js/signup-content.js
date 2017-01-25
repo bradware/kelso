@@ -30,14 +30,16 @@ $(document).ready(function() {
 	
 	// click touchend
 	$(document).on('click', '.tile', function(e) {
+		console.log('in here');
 		if ($('#tooltip').is(':visible') && currTile === e.target.id) {
 			return;
 		} else {
 			if (!currTile) {
-				currTile = e.target.id;
+				console.log($(e.target).closest('.tile')[0].id);
+				currTile = $(e.target).closest('.tile')[0].id;
 			}
 			saveContentViewers(currTile, getCheckboxes());
-			currTile = e.target.id;
+			currTile = $(e.target).closest('.tile')[0].id;
 			$('#tooltip').fadeIn().css(({left: e.pageX - 50, top: e.pageY - 75}));
 			populateCheckboxes();
 		}
@@ -45,10 +47,13 @@ $(document).ready(function() {
 
 	// click touchend
 	$(document).on('click', 'body', function(e) {
-		if ($(e.target).hasClass('tile') || $(e.target).parents('#tooltip').length > 0) {
+		if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
+			$(e.target).parents('#tooltip').length > 0) {
 			return;
 		} else {
-			saveContentViewers(currTile, getCheckboxes());
+			if (currTile) {
+				saveContentViewers(currTile, getCheckboxes());
+			}
 			$('#tooltip').fadeOut();
 		}
 	});
@@ -64,7 +69,7 @@ $(document).ready(function() {
 				}
 			}
 		}
-		
+
 		var obj = {};
 		obj.viewers = viewers;
 		$.ajax({
@@ -81,7 +86,12 @@ $(document).ready(function() {
 	});
 });
 
+function validateTarget(e) {
+
+}
+
 function initDataAndDom() {
+	// styles
 	$.get('/api/content/all')
 		.done(function(res) {
 			contents = res.contents;
@@ -149,7 +159,7 @@ function getTooltip(arr) {
 }
 
 function renderTooltipContent(viewer) {
-	var start = '<div class="checkbox"><label>';
+	var start = '<div class="checkbox"><label class="light-gray">';
 	var middle = '<input type="checkbox" id="' + viewer._id + '" value="' + viewer.name + '">' + viewer.name;
 	var end = '</label></div>';
 	return start + middle + end;
@@ -221,21 +231,4 @@ function getCheckboxes() {
 		}
 	}
 	return ids;
-}
-
-function updateModalDom(arr) {
-	for (let i = 0; i < arr.length; i++) {
-		var modalComponent = getModalComponent(arr[i].name);
-		$('.modal-body').append(modalComponent);
-	}
-}
-
-function getModalComponent(name) {
-	var component = 
-		'<div class="checkbox">' +
-			'<label>' +
-				'<input type="checkbox">' + name + 
-			'</label>' +
-		'</div>';
-	return component;
 }
