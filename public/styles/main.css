@@ -9,7 +9,7 @@ html, body {
 
 main {
 	background-color: #2C2F3D; /* Medium Gray */
-	margin-top: 80px;
+	margin-top: 60px;
 }
 
 .wrapper {
@@ -39,6 +39,10 @@ a:active {
 
 h2 {
 	font-size: 22px;
+}
+
+.light-font {
+	font-weight: 300;
 }
 
 .page-title {
@@ -185,6 +189,10 @@ label {
 
 .search-bar {
 	margin-top: 20px;
+}
+
+.checkbox label {
+	font-weight: 300;
 }
 
 #tooltip {
