@@ -1,29 +1,26 @@
 'use strict';
 
 var contents = null;
-var viewers = null;
 var recommended = null;
-var viewingMap = null; // built after API cal
-var contentMap = null; // built after API cal
+var viewers = null;
+var viewingMap = null; // built after API call
+var contentMap = null; // built after API call
 var viewerMap = {};
 
 // Wait until DOM loads
 $(document).ready(function() {
+	$('#tooltip').hide();
+
 	$.get('/api/content/all')
 		.done(function(res) {
-			contents = res;
+			contents = res.contents;
 			contentMap = buildMap(contents);
-			console.log(contents);
-		})
-		.fail(function(error) {
-			console.log(error);
-		});
-
-	$.get('/api/content/rec')
-		.done(function(res) {
-			recommended = res;
-			console.log(recommended);
-			getContentResults(recommended);
+			getContentResults(contents);
+			
+			$('.tile').hide();
+			
+			recommended = res.recs;
+			showRecommendedResults(recommended);
 		})
 		.fail(function(error) {
 			console.log(error);
@@ -33,22 +30,28 @@ $(document).ready(function() {
 		.done(function(res) {
 			viewers = res;
 			viewingMap = buildMap(viewers);
-			updateModalDom(viewers);
-			console.log(viewers);
+			$('#content-results').prepend(getTooltip(viewers));
+			$('#tooltip').hide();
 		})
 		.fail(function(error) {
 			console.log(error);
 		});
 
 	$(document).on('keydown', 'input', function(e) {
-		$('#content-results').empty();
-		if ($(this)[0].value.length > 2) {
-			getContentResults(searchContents($(this)[0].value));
+		$('.tile').hide();
+		if ($(this)[0].value.length === 0) {
+			showRecommendedResults(recommended);
+		} else if ($(this)[0].value.length > 1) {
+			searchContents($(this)[0].value);
 		}
 	});	
-
-	$('.tile').click(function(e) {
-		
+	
+	$(document).on('click', 'body', function(e) {
+		if ($(e.target).hasClass('tile')) {
+			$('#tooltip').fadeIn().css(({left: e.pageX, top: e.pageY - 50}));
+		} else {
+			$('#tooltip').fadeOut();
+		}
 	});
 
 	$('#save').click(function() {
@@ -60,6 +63,29 @@ $(document).ready(function() {
 	});
 
 });
+
+function getTooltip(arr) {
+	var start = '<div id="tooltip"><h4 class="text-center">Who?</h4>';
+	var middle = '';
+	var end = '</div>';
+	for (let i = 0; i < arr.length; i++) {
+		middle += renderTooltipContent(arr[i]);
+	}
+	return start + middle + end;
+}
+
+function renderTooltipContent(viewer) {
+	var start = '<div class="checkbox"><label>';
+	var middle = '<input type="checkbox" id="' + viewer._id + 'value="' + viewer.name + '">' + viewer.name;
+	var end = '</label></div>';
+	return start + middle + end;
+}
+
+function showRecommendedResults(recs) {
+	for (let i = 0; i < recs.length; i++) {
+		$('#'+recs[i]._id).show();
+	}
+}
 
 function buildMap(arr) {
 	var map = {};
@@ -87,17 +113,11 @@ function renderContentResult(res) {
 }
 
 function searchContents(str) {
-	var results = [];
 	for (let i = 0; i < contents.length; i++) {
 		if (contents[i].title.toLowerCase().match(str.toLowerCase())) {
-			results.push(contents[i]);
+			$('#'+contents[i]._id).show();
 		}
 	}
-	return results;
-}
-
-function buildTooltip() {
-	
 }
 
 function clearCheckboxes() {

@@ -25,7 +25,14 @@ router.get('/content/all', function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
-			res.send(contents);
+			var recommended = ['Game of Thrones', 'The Office', 'Star Wars', 'La La Land'];
+			Content.find({'title': {$in: recommended}}, function(err, recs) {
+				if (err) {
+					next(err);
+				} else {
+					res.send({contents: contents, recs: recs});
+				}
+		  });
 		}
   });
 });
