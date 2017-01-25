@@ -41,7 +41,7 @@ $(document).ready(function() {
     var centerY = ($($this).offset().top + $($this).height() / 2) - (($('#tooltip').height() / 2) + 10);
     
     $('#tooltip').fadeIn().css(({left: centerX, top: centerY}));
-    //$('#tooltip').fadeIn().css(({left: e.pageX - 50, top: e.pageY - 75}));
+    $('#'+currTile).fadeIn().css('background-color', '#727DF0');
     populateCheckboxes();
   });
 
@@ -52,9 +52,9 @@ $(document).ready(function() {
       return;
     } else {
       if (currTile) {
+        $('#tooltip').fadeOut();
         saveContentViewers(currTile, getCheckboxes());
       }
-      $('#tooltip').fadeOut();
     }
   });
 
@@ -159,7 +159,7 @@ function getTooltip(arr) {
 }
 
 function renderTooltipContent(viewer) {
-  var start = '<div class="checkbox"><label class="light-gray">';
+  var start = '<div class="checkbox"><label class="light-gray-font">';
   var middle = '<input type="checkbox" id="' + viewer._id + '" value="' + viewer.name + '">' + viewer.name;
   var end = '</label></div>';
   return start + middle + end;

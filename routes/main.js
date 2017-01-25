@@ -50,7 +50,7 @@ router.get('/signup-success', function(req, res, next) {
   if (isLoggedIn(req)) {
     res.sendFile(path.join(__dirname, '../public/templates', 'signup-success.html'));
   } else {
-    res.redirect('/signup');
+    res.redirect('/');
   }
 });
 
@@ -58,7 +58,7 @@ router.get('/signup-viewer', function(req, res, next) {
   if (isLoggedIn(req)) {
     res.sendFile(path.join(__dirname, '../public/templates', 'signup-viewer.html'));
   } else {
-    res.redirect('/signup');
+    res.redirect('/');
   }
 });
 
@@ -66,7 +66,7 @@ router.get('/signup-content', function(req, res, next) {
   if (isLoggedIn(req)) {
     res.sendFile(path.join(__dirname, '../public/templates', 'signup-content.html'));
   } else {
-    res.redirect('/signup');
+    res.redirect('/');
   }
 });
 
@@ -89,6 +89,14 @@ router.get('/add-content', function(req, res, next) {
 router.get('/watch', function(req, res, next) {
   if (isLoggedIn(req)) {
     res.sendFile(path.join(__dirname, '../public/templates', 'watch.html'));
+  } else {
+    res.redirect('/');
+  }
+});
+
+router.get('/watch-success', function(req, res, next) {
+  if (isLoggedIn(req)) {
+    res.sendFile(path.join(__dirname, '../public/templates', 'watch-success.html'));
   } else {
     res.redirect('/');
   }

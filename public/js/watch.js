@@ -1,21 +1,46 @@
 'use strict';
 
 var viewer = null;
-var otherViewers = {};
-var contentTitle = null;
 var contentID = null;
+
+var otherViewers = {};
+var contentMap = {};
 
 // Wait until DOM loads
 $(document).ready(function() {
   getContentTiles();
+  getWatchModal();
 
   $(document).on('click', '.tile', function(e) { 
-    contentTitle = e.currentTarget.children[0].children[0].innerHTML;
-    contentID = e.currentTarget.id;
-    $('#modal-title')[0].innerText = 'Watch ' + contentTitle + ' ?';
+    contentID = $(e.target).closest('.tile')[0].id;
+
+    $('.tile').css('background-color', '#2C2F3D');
+    $('#'+contentID).css('background-color', '#727DF0');
+    
+    var centerX = ($(window).width() / 2) - (($('#watch-modal').width() / 2) + 15);
+    var centerY = ($(window).height() / 2) - (($('#watch-modal').height() / 2) - 15);
+    $('#watch-modal').find('h4')[0].innerHTML = 'Watching ' + contentMap[contentID].title + '?';
+    $('#watch-modal').fadeIn().css(({left: centerX, top: centerY}));
   });
 
-  $('#watch-btn').click(function() {
+  $(document).on('click', 'body', function(e) { 
+    if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
+        $(e.target).parents('#watch-modal').length > 0 || $(e.target).is('#watch-modal')) {
+      return;
+    } else {
+      $('#watch-modal').fadeOut();
+      $('.tile').css('background-color', '#2C2F3D');
+    }
+  });
+
+  $(document).on('click', '#cancel-btn', function(e) {
+    $('#watch-modal').fadeOut();
+    $('.tile').css('background-color', '#2C2F3D');
+  });
+
+  $(document).on('click', '#watch-btn', function() {
+    $('#watch-modal').fadeOut();
+    
     var obj = {};
     obj.viewer = createViewerSmall(viewer);
     obj.content = createContentSmall();
@@ -43,10 +68,32 @@ $(document).ready(function() {
     } else {
       var contentDom = findIntersection(otherViewersChecked);
     }
-    $('#contents').empty();
-    renderContentTiles(contentDom);
+    $('#content-results').empty();
+    renderContentResults(contentDom);
   });
 });
+
+function getContentTiles() {
+  $.get('/api/viewer/content')
+    .done(function(res) {
+      setGlobals(res);
+      renderContentResults(viewer.content);
+      renderNames();
+      $('#content-results').css('background-color', '#1D1F29');
+      $('body').prepend(getWatchModal());
+      $('#watch-modal').hide();
+    })
+    .fail(function(error) {
+      console.log(error);
+    });
+}
+
+function setGlobals(res) {
+  viewer = res.viewer;
+  for (let i = 0; i < res.other_viewers.length; i++) {
+    otherViewers[res.other_viewers[i]._id] = res.other_viewers[i];
+  }
+}
 
 function getOtherViewersChecked() {
   var otherViewersChecked = [];
@@ -62,7 +109,7 @@ function getOtherViewersChecked() {
 function createContentSmall() {
   var contentSmall = {};
   contentSmall._id = contentID;
-  contentSmall.title = contentTitle;
+  contentSmall.title = contentMap[contentID].title;
   return contentSmall;
 }
 
@@ -103,7 +150,7 @@ function findIntersectionOtherViewers(currContent, otherViewersChecked) {
 function renderNames() {
   for (var id in otherViewers) {
     var nameComponent = renderNameComponent(otherViewers[id]);
-    $('#names').append(nameComponent);
+    $('#viewers').append(nameComponent);
   }
 }
 
@@ -111,47 +158,36 @@ function renderNameComponent(otherViewer) {
   var id = otherViewer._id;
   var name = otherViewer.name;
   var component =
-    '<label class="checkbox-inline">' +
+    '<label class="checkbox-inline light-gray-font">' +
       '<input type="checkbox" id="' + id + '" value="' + name + '">' + name +
     '</label>';
   return component;
 }
 
-function getContentTiles() {
-  $.get('/api/viewer/content')
-    .done(function(res) {
-      setGlobals(res);
-      renderContentTiles(viewer.content);
-      renderNames();
-    })
-    .fail(function(error) {
-      console.log(error);
-    });
-}
-
-function renderContentTiles(contentDom) {
-  for (let i = 0; i < contentDom.length; i++) {
-    var contentTile = renderContentTile(contentDom[i]);
-    $('#contents').append(contentTile);
+function renderContentResults(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    contentMap[arr[i]._id] = arr[i];
+    $('#content-results').append(renderContentResult(arr[i]));
   }
+  $('.tile-content').css('margin-top', '55px');
 }
 
-function renderContentTile(content) {
+function renderContentResult(res) {
   var content =
-    '<div class="row">' +
-      '<div class="col-xs-12 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm" ' 
-        + 'id="' + content._id + '" ' + '>' +
-        '<div class="tile-content">' +
-          '<h4>' + content.title + '</h4>' +
-        '</div>' +
+    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
+      '<div class="tile-content">' +
+        '<h4>' + res.title +'</h4>' +
       '</div>' +
     '</div>';
   return content;
 }
 
-function setGlobals(res) {
-  viewer = res.viewer;
-  for (let i = 0; i < res.other_viewers.length; i++) {
-    otherViewers[res.other_viewers[i]._id] = res.other_viewers[i];
-  }
+function getWatchModal() {
+  var content =
+    '<div id="watch-modal" class="text-center">' +
+      '<h4></h4>' +
+      '<button id="cancel-btn" type="button" class="btn purple-font modal-btn ">nah</button>' +
+      '<button id="watch-btn" type="button" class="btn green-font modal-btn ">yeah</button>' +
+    '</div>';
+  return content;
 }
