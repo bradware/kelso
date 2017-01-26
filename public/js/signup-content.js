@@ -47,6 +47,7 @@ $(document).ready(function() {
 
   // click touchend
   $(document).on('click', 'html', function(e) {
+    updateSubmitBtn();
     if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
         $(e.target).parents('#tooltip').length > 0) {
       return;
@@ -83,6 +84,34 @@ $(document).ready(function() {
       });
   });
 });
+
+function updateSubmitBtn() {
+  console.log('in here');
+  console.log(contentViewerMap);
+  if (emptyMap()) {
+    console.log('empty!!');
+    if (!$('#submit-btn').hasClass('purple')) {
+      $('#submit-btn').addClass('purple');
+      $('#submit-btn').removeClass('green');
+      $('#submit-btn').html('skip');
+    }
+  } else {
+    if (!$('#submit-btn').hasClass('green')) {
+      $('#submit-btn').addClass('green');
+      $('#submit-btn').removeClass('purple');
+      $('#submit-btn').html('next');
+    }
+  }
+}
+
+function emptyMap() {
+  for (var prop in contentViewerMap) {
+    if (contentViewerMap.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return true;
+}
 
 function initDataAndDom() {
   $.get('/api/content/all')
@@ -131,7 +160,7 @@ function createContentSmall(content) {
 
 function saveContentViewers(contentID, viewerIDs) {
   if (viewerIDs.length === 0) {
-    contentViewerMap[contentID] = [];
+    delete contentViewerMap[contentID];
     $('#'+contentID).find('p')[0].innerHTML = '';
     $('#'+contentID).css('background-color', '#2C2F3D');
   } else {
