@@ -8,6 +8,7 @@ Mobile web application for consuming media content with friends and family. Depl
 * [Bootstrap](//getbootstrap.com/)
 * [Font Awesome](//fontawesome.io)
 * [jQuery 2.x](//code.jquery.com)
+* [node-mongo-seeds](//www.npmjs.com/package/node-mongo-seeds)
 * [Heroku](//devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
 
 ## Getting Started
