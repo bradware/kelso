@@ -43,11 +43,11 @@ $(document).ready(function() {
     $('#tooltip').fadeIn().css(({left: centerX, top: centerY}));
     $('#'+currTile).fadeIn().css('background-color', '#727DF0');
     populateCheckboxes();
+    updateSubmitBtn();
   });
 
   // click touchend
   $(document).on('click', 'html', function(e) {
-    updateSubmitBtn();
     if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
         $(e.target).parents('#tooltip').length > 0) {
       return;
@@ -57,6 +57,7 @@ $(document).ready(function() {
         saveContentViewers(currTile, getCheckboxes());
       }
     }
+    updateSubmitBtn();
   });
 
   // click touchend
