@@ -17,6 +17,6 @@ Mobile web application for consuming media content with friends and family. Depl
 * `cd kelso-prototype`
 * `npm install`
 * `bower install`
-* `seed`
+* `npm install -g node-mongo-seeds && seed`
 * `npm start`
 * visit `localhost:3001` in your browser
