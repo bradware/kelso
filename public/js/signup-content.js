@@ -86,10 +86,7 @@ $(document).ready(function() {
 });
 
 function updateSubmitBtn() {
-  console.log('in here');
-  console.log(contentViewerMap);
   if (emptyMap()) {
-    console.log('empty!!');
     if (!$('#submit-btn').hasClass('purple')) {
       $('#submit-btn').addClass('purple');
       $('#submit-btn').removeClass('green');
