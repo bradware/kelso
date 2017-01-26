@@ -5,15 +5,18 @@ html, body {
   margin: 0;
   min-height: 100%;
   overflow-x: hidden;
+  cursor: pointer; /* For mobile touch */
 }
 
 main {
   background-color: #2C2F3D; /* Medium Gray */
   margin-top: 60px;
+  overflow-x: hidden;
 }
 
 .wrapper {
   overflow-y: scroll;
+  overflow-x: hidden;
   padding: 0 10% 0 10%;
 }
 
@@ -113,7 +116,7 @@ button.button-theme {
   Form & Signup
 */
 
-form {
+form, .form-control {
   font-size: 16px;
 }
 
@@ -205,6 +208,10 @@ label {
 
 .checkbox label {
   font-weight: 300;
+}
+
+input[type=checkbox] {
+  margin-top: 2px;
 }
 
 #tooltip {

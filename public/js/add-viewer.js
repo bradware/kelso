@@ -34,7 +34,7 @@ $(document).ready(function() {
       var newOtherViewer = grabInput();
       if (newOtherViewer) {
         otherViewers.push(newOtherViewer);
-        updatePurple();
+        updateDone();
         $('#other-viewers').append(renderOtherViewerComponent(newOtherViewer));
       }
       $('input').val(''); // clear input
@@ -72,31 +72,38 @@ function renderOtherViewerComponent(otherViewer) {
 }
 
 function validateDom() {
-  if ($('input').length === 0) {
-    updatePurple();
+  if (allEmpty()) {
+    updateDone();
     $('#submit-btn').prop('disabled', false);
-  } else if (!emptyInput()) {
-    updateGreen();
-    $('#submit-btn').prop('disabled', false);
-  } else {
-    updateGreen();
+  } else if (oneEmpty()) {
+    updateSave();
     $('#submit-btn').prop('disabled', true);
+  } else {
+    updateSave();
+    $('#submit-btn').prop('disabled', false);
   }
 }
 
-function updateGreen() {
-  $('#submit-btn').addClass('green');
-  $('#submit-btn').removeClass('purple');
+function updateSave() {
   $('#submit-btn').html('save');
 }
 
-function updatePurple() {
-  $('#submit-btn').addClass('purple');
-  $('#submit-btn').removeClass('green');
+function updateDone() {
   $('#submit-btn').html('done');
 }
 
-function emptyInput() {
+function allEmpty() {
+  var input = $('input');
+  var emptyInput = false;
+  for (let i = 0; i < input.length; i++) {
+    if (input[i].value.length !== 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function oneEmpty() {
   var input = $('input');
   var emptyInput = false;
   for (let i = 0; i < input.length; i++) {

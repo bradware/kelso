@@ -45,6 +45,5 @@ ViewerSchema.statics.authenticate = function(email, password, callback) {
   });
 }
 
-//ViewerSchema.path('email').index({unique: true});
 var Viewer = mongoose.model('Viewer', ViewerSchema);
 module.exports = Viewer;
