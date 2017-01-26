@@ -70,7 +70,7 @@ function initDataAndDom() {
       contents = res.contents;
       contentMap = buildMap(contents);
       getContentResults(contents);
-      
+      $('#content-results').css('background-color', '#1D1F29');
       $('.tile').hide();
       $('.tile-content').css('margin-top', '55px');
       
@@ -82,32 +82,11 @@ function initDataAndDom() {
     });
 }
 
-function updateViewerContent(currContent, currViewer) {
-  for (let i = 0; i < currViewer.content.length; i++) {
-    if (currViewer.content[i]._id === currContent._id) {
-      return false;
-    }
-  }
-  return true;
-}
-
 function createContentSmall(content) {
   var obj = {};
   obj._id = content._id;
   obj.title = content.title;
   return obj;
-}
-
-function saveContentViewers(contentID, viewerIDs) {
-  if (viewerIDs.length === 0) {
-    contentViewerMap[contentID] = [];
-    $('#'+contentID).find('p')[0].innerHTML = '';
-    $('#'+contentID).css('background-color', '#2C2F3D');
-  } else {
-    contentViewerMap[contentID] = viewerIDs;
-    $('#'+contentID).find('p')[0].innerHTML = viewerIDs.length + ' watching';
-    $('#'+contentID).css('background-color', '#727DF0');
-  }
 }
 
 function showRecommendedResults(recs) {
@@ -136,7 +115,7 @@ function getContentResults(arr) {
 
 function renderContentResult(res) {
   var content =
-    '<div class="col-xs-6 text-center tile" id="' + res._id + '">' +
+    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
       '<div class="tile-content">' +
         '<h4>' + res.title +'</h4>' +
         '<p class="light-font"></p>' +

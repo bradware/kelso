@@ -37,15 +37,4 @@ router.get('/content/all', function(req, res, next) {
   });
 });
 
-router.get('/content/rec', function(req, res, next) {
-  var recommended = ['Game of Thrones', 'The Office', 'Star Wars', 'La La Land'];
-  Content.find({'title': {$in: recommended}}, function(err, contents) {
-    if (err) {
-      next(err);
-    } else {
-      res.send(contents);
-    }
-  });
-});
-
 module.exports = router;

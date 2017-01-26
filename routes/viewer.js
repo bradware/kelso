@@ -86,6 +86,59 @@ router.put('/viewer/other-viewers', middleware.isLoggedIn, function(req, res, ne
   });
 });
 
+router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
+  for (let i = 0; i < req.body.viewers.length; i++) {
+    Viewer.findByIdAndUpdate(req.body.viewers[i]._id, req.body.viewers[i], {new: true}, function(err, viewer) {
+      if (err) {
+        next(err);
+      }
+    }); 
+  }
+  res.status(200);
+  res.send({redirect: '/signup-success'});
+});
+
+router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
+  Viewer.findById(req.session.viewerID, function(err, viewer) {
+    if (err) {
+      next(err);
+    } else {
+      viewer.content = req.body.content;
+      viewer.save(function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200);
+          res.send({redirect: '/home'});
+        }
+      });
+    }
+  }); 
+});
+
+router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
+  Viewer.findById(req.session.viewerID, function(err, viewer) {
+    if (err) {
+      next(err);
+    } else {
+      Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
+        if (otherViewers) {
+          otherViewers.unshift(viewer);
+          res.send(otherViewers);
+        } else {
+          otherViewers = [];
+          otherViewers.push(viewer);
+          res.send(otherViewers);
+        }
+      });
+    }
+  });
+});
+
+/*
+* Helper functions below for route logic
+*/
+
 function updateOtherViewersArray(viewer, viewerSmall) {
   var found = false;
   for (var i = 0; i < viewer.other_viewers.length; i++) {
@@ -145,36 +198,6 @@ function createNewViewer(obj, viewerSmall) {
   return newViewer;
 }
 
-router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-  for (let i = 0; i < req.body.viewers.length; i++) {
-    Viewer.findByIdAndUpdate(req.body.viewers[i]._id, req.body.viewers[i], {new: true}, function(err, viewer) {
-      if (err) {
-        next(err);
-      }
-    }); 
-  }
-  res.status(200);
-  res.send({redirect: '/signup-success'});
-});
-
-router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-  Viewer.findById(req.session.viewerID, function(err, viewer) {
-    if (err) {
-      next(err);
-    } else {
-      viewer.content = req.body.content;
-      viewer.save(function(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.status(200);
-          res.send({redirect: '/home'});
-        }
-      });
-    }
-  }); 
-});
-
 function updateContentArray(content, title) {
   var found = false;
   for (var i = 0; i < content.length; i++) {
@@ -185,45 +208,5 @@ function updateContentArray(content, title) {
   }
   return !found;
 }
-
-router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
-  Viewer.findById(req.session.viewerID, function(err, viewer) {
-    if (err) {
-      next(err);
-    } else {
-      Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
-        if (otherViewers) {
-          otherViewers.unshift(viewer);
-          res.send(otherViewers);
-        } else {
-          otherViewers = [];
-          otherViewers.push(viewer);
-          res.send(otherViewers);
-        }
-      });
-    }
-  });
-});
-
-router.get('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-  Viewer.findById(req.session.viewerID, function(err, viewer) {
-    if (err) {
-      next(err);
-    } else {
-      var obj = {};
-      obj.viewer = viewer;
-
-      Viewer.find({'_id': {$in: viewer.other_viewers}}, function(err, otherViewers) {
-        if (otherViewers) {
-          obj.other_viewers = otherViewers;
-          res.send(obj);
-        } else {
-          obj.other_viewers = [];
-          res.send(obj);
-        }
-      });
-    }
-  });
-});
 
 module.exports = router;

@@ -23,7 +23,7 @@ $(document).ready(function() {
     $('#watch-modal').fadeIn().css(({left: centerX, top: centerY}));
   });
 
-  $(document).on('click', 'body', function(e) { 
+  $(document).on('click', 'html', function(e) { 
     if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
         $(e.target).parents('#watch-modal').length > 0 || $(e.target).is('#watch-modal')) {
       return;
@@ -74,7 +74,7 @@ $(document).ready(function() {
 });
 
 function getContentTiles() {
-  $.get('/api/viewer/content')
+  $.get('/api/viewers')
     .done(function(res) {
       setGlobals(res);
       renderContentResults(viewer.content);
@@ -89,9 +89,9 @@ function getContentTiles() {
 }
 
 function setGlobals(res) {
-  viewer = res.viewer;
-  for (let i = 0; i < res.other_viewers.length; i++) {
-    otherViewers[res.other_viewers[i]._id] = res.other_viewers[i];
+  viewer = res[0];
+  for (let i = 1; i < res.length; i++) {
+    otherViewers[res[i]._id] = res[i];
   }
 }
 

@@ -46,7 +46,7 @@ $(document).ready(function() {
   });
 
   // click touchend
-  $(document).on('click', 'body', function(e) {
+  $(document).on('click', 'html', function(e) {
     if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
         $(e.target).parents('#tooltip').length > 0) {
       return;
@@ -90,7 +90,7 @@ function initDataAndDom() {
       contents = res.contents;
       contentMap = buildMap(contents);
       getContentResults(contents);
-      
+      $('#content-results').css('background-color', '#1D1F29');
       $('.tile').hide();
       $('.tile-content').css('margin-top', '50px');
       
@@ -181,7 +181,7 @@ function getContentResults(arr) {
 
 function renderContentResult(res) {
   var content =
-    '<div class="col-xs-6 text-center tile" id="' + res._id + '">' +
+    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
       '<div class="tile-content">' +
         '<h4>' + res.title +'</h4>' +
         '<p class="light-font"></p>' +
