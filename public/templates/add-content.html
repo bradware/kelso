@@ -14,82 +14,33 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/header.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo_alt_green.png">
     <!-- END OF HEADER -->
   </head>
-  <body class="container-fluid">
+  <body>
     <!-- Header Inserted - NO PANEL HEADING ON INDEX -->
     <header class="row"></header>
     <!-- End of Header -->
     <main>
-      <div class="row text-center header">
-        <i class="fa fa-television fa-3x"></i>
-      </div>
-      <!-- Small modal -->
-      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="cancel-btn" class="btn btn-default modal-btn" data-dismiss="modal">Cancel</button>
-              <button type="button" id="save-btn" class="btn btn-primary modal-btn" data-dismiss="modal">Save</button>
-            </div>
+      <!-- Wrapper -->
+      <div class="wrapper container-fluid">
+        <div class="row text-center page-title">
+          <h2>What do you watch?</h2>
+          <p>Select a show to save<br>content that you watch.</p>
+          <div class="input-group search-bar">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default purple" id="search-btn" type="button"><i class="fa fa-search"></i></button>
+            </span>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>Game of Thrones</h4>
-          </div>
-        </div>
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>The Office</h4>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>Westworld</h4>
-          </div>
-        </div>
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>ESPN</h4>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>The Notebook</h4>
-          </div>
-        </div>
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>Star Wars</h4>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>Game</h4>
-          </div>
-        </div>
-        <div class="col-xs-6 text-center tile" data-toggle="modal" data-target=".bs-example-modal-sm">
-          <div class="tile-content">
-            <h4>Parks and Rec</h4>
-          </div>
-        </div>
-      </div>
+      <div class="row container-fluid" id="content-results"></div>
+      <div class="bottom-padding"></div>
+      <button type="submit" id="submit-btn" class="btn btn-lg btn-block green button-theme fixed-bottom">done</button>
     </main>
 
     <!-- JS -->

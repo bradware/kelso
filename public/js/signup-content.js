@@ -72,26 +72,19 @@ $(document).ready(function() {
 
     var obj = {};
     obj.viewers = viewers;
-    $.ajax({
-      url: '/api/viewer/content',
-      type: 'PUT',
-      data: obj,
-      success: function(res) {
-        document.location.href = '/signup-success';
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    });
+    $.post('/api/viewer/content', obj)
+      .done(function(res) {
+        if (res.redirect) {
+          document.location.href = res.redirect;
+        }
+      })
+      .fail(function(error) {
+        console.log(error);
+      });
   });
 });
 
-function validateTarget(e) {
-
-}
-
 function initDataAndDom() {
-  // styles
   $.get('/api/content/all')
     .done(function(res) {
       contents = res.contents;

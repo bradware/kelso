@@ -146,36 +146,6 @@ function createNewViewer(obj, viewerSmall) {
 }
 
 router.post('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
-  Content.findOne({'title': {$in: req.body.contentTitle}}, function(err, content) {
-    if (err) {
-      next(err);
-    } else {
-      var contentObj = {};
-      contentObj._id = content._id;
-      contentObj.title = content.title;
-      
-      for (let i = 0; i < req.body.ids.length; i++) {
-        Viewer.findById(req.body.ids[i], function (err, viewer) {
-          if (err) {
-            next(err);
-          } else {
-            if (updateContentArray(viewer.content, contentObj.title)) {
-              Viewer.findByIdAndUpdate(viewer._id, {$push:{content: contentObj}}, {new: true}, function(err) {
-                if (err) {
-                  return next(err);
-                } else {
-                  res.status(200);
-                }
-              });
-            }
-          }
-        });
-      }
-    }
-  });
-});
-
-router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
   for (let i = 0; i < req.body.viewers.length; i++) {
     Viewer.findByIdAndUpdate(req.body.viewers[i]._id, req.body.viewers[i], {new: true}, function(err, viewer) {
       if (err) {
@@ -184,7 +154,25 @@ router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
     }); 
   }
   res.status(200);
-  res.send();
+  res.send({redirect: '/signup-success'});
+});
+
+router.put('/viewer/content', middleware.isLoggedIn, function(req, res, next) {
+  Viewer.findById(req.session.viewerID, function(err, viewer) {
+    if (err) {
+      next(err);
+    } else {
+      viewer.content = req.body.content;
+      viewer.save(function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200);
+          res.send({redirect: '/home'});
+        }
+      });
+    }
+  }); 
 });
 
 function updateContentArray(content, title) {

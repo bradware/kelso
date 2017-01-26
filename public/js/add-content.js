@@ -1,34 +1,154 @@
 'use strict';
 
-var viewerMap = {};
-var contentTitle = null;
-var viewer = null;
+// lists
+var contents = null;
+var recommended = null;
+
+// helper maps
+var contentMap = null; // built after API call
+var watchMap = null; // built after API call
 
 // Wait until DOM loads
 $(document).ready(function() {
-  $('.tile').click(function(e) {
-    contentTitle = e.currentTarget.children[0].children[0].innerHTML;
-    $('#modal-title')[0].innerText = 'You watch ' + contentTitle + '?';
+  initDataAndDom();
+
+  $(document).on('keydown', 'input', function(e) {
+    $('.tile').hide();
+    if ($(this)[0].value.length === 0) {
+      showRecommendedResults(recommended);
+    } else if ($(this)[0].value.length > 1) {
+      searchContents($(this)[0].value);
+    }
+  }); 
+  
+  // click touchend
+  $(document).on('click', '.tile', function(e) {
+    var contentID = $(e.target).closest('.tile')[0].id;
+    if (watchMap[contentID]) {
+      $('#'+contentID).css('background-color', '#2C2F3D');
+      delete watchMap[contentID];
+    } else {
+      $('#'+contentID).css('background-color', '#727DF0');
+      watchMap[contentID] = contentMap[contentID];
+    }
   });
 
-  $('#save-btn').click(function() {
+  // click touchend
+  $('#submit-btn').on('click', function() {
+    var contentArr = [];
+    for (var contentID in watchMap) {
+      contentArr.push(createContentSmall(watchMap[contentID]));
+    }
+
     var obj = {};
-    obj.contentTitle = contentTitle;
-    obj.ids = [ ];
-    obj.ids.push(viewer._id);
-    
-    $.post('/api/viewer/content', obj)
-      .fail(function(error) {
-        console.log(error);
-      });
+    obj.content = contentArr;
+    $.ajax({
+      url: '/api/viewer/content',
+      type: 'PUT',
+      data: obj,
+      success: function(res) {
+        document.location.href = res.redirect;
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   });
-
-  $.get('/api/viewer')
-      .then(function(res) {
-        viewer = res;
-      })
-      .fail(function(error) {
-        console.log(error);
-      });
-
 });
+
+function initDataAndDom() {
+  $.get('/api/viewer')
+    .done(function(res) {
+      watchMap = buildMap(res.content);
+    })
+    .fail(function(error) {
+      console.log(error);
+    });
+
+  $.get('/api/content/all')
+    .done(function(res) {
+      contents = res.contents;
+      contentMap = buildMap(contents);
+      getContentResults(contents);
+      
+      $('.tile').hide();
+      $('.tile-content').css('margin-top', '55px');
+      
+      recommended = res.recs;
+      showRecommendedResults(recommended);
+    })
+    .fail(function(error) {
+      console.log(error);
+    });
+}
+
+function updateViewerContent(currContent, currViewer) {
+  for (let i = 0; i < currViewer.content.length; i++) {
+    if (currViewer.content[i]._id === currContent._id) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function createContentSmall(content) {
+  var obj = {};
+  obj._id = content._id;
+  obj.title = content.title;
+  return obj;
+}
+
+function saveContentViewers(contentID, viewerIDs) {
+  if (viewerIDs.length === 0) {
+    contentViewerMap[contentID] = [];
+    $('#'+contentID).find('p')[0].innerHTML = '';
+    $('#'+contentID).css('background-color', '#2C2F3D');
+  } else {
+    contentViewerMap[contentID] = viewerIDs;
+    $('#'+contentID).find('p')[0].innerHTML = viewerIDs.length + ' watching';
+    $('#'+contentID).css('background-color', '#727DF0');
+  }
+}
+
+function showRecommendedResults(recs) {
+  for (let i = 0; i < recs.length; i++) {
+    $('#'+recs[i]._id).show();
+  }
+}
+
+function buildMap(arr) {
+  var map = {};
+  for (let i = 0; i < arr.length; i++) {
+    map[arr[i]._id] = arr[i];
+  }
+  return map;
+}
+
+function getContentResults(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    var renderedResult = renderContentResult(arr[i]);
+    $('#content-results').append(renderedResult);
+    if (watchMap[arr[i]._id]) {
+      $('#'+arr[i]._id).css('background-color', '#727DF0');
+    }
+  }
+}
+
+function renderContentResult(res) {
+  var content =
+    '<div class="col-xs-6 text-center tile" id="' + res._id + '">' +
+      '<div class="tile-content">' +
+        '<h4>' + res.title +'</h4>' +
+        '<p class="light-font"></p>' +
+      '</div>' +
+    '</div>';
+  return content;
+}
+
+function searchContents(str) {
+  for (let i = 0; i < contents.length; i++) {
+    if (contents[i].title.toLowerCase().match(str.toLowerCase())) {
+      $('#'+contents[i]._id).show();
+    }
+  }
+}
