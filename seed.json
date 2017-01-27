@@ -1,5 +1,6 @@
 {
   "undefined": "localhost/kelso",
   "dev": "localhost/kelso",
-  "prod": "localhost/kelso"
+  "prod": "localhost/kelso",
+  "process.env.MONGODB_URI": "mongodb://<kelso>:Kf4=]8@9@ds129459.mlab.com:29459/heroku_6zcq4cqf"
 }
