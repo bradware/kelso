@@ -1,4 +1,4 @@
 {
-  "production": "mongodb://heroku_6zcq4cqf:8pie938n9urjpdtc06b2ft0l0o@ds129459.mlab.com:29459/heroku_6zcq4cqf",
-  "undefined": "localhost/kelso-prototype"
+  "production": "localhost/kelso",
+  "undefined": "localhost/kelso"
 }

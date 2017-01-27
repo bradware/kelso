@@ -1,10 +1,10 @@
 {
-  "name": "Kelso-Prototype",
-  "homepage": "https://ancient-beach-62300.herokuapp.com",
+  "name": "Kelso",
+  "homepage": "https://bradware.com",
   "authors": [
     "Brad Ware bwarenohs@gmail.com"
   ],
-  "description": "Kelso prototype web app for Kenzie Lane",
+  "description": "Mobile web app for watching media content with friends and family",
   "main": "server.js",
   "private": true,
   "ignore": [

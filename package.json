@@ -1,7 +1,7 @@
 {
-  "name": "Kelso-Prototype",
+  "name": "Kelso",
   "version": "1.0.0",
-  "description": "Kelso prototype web app for Kenzie Lane",
+  "description": "Mobile web app for watching media content with friends and family",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,12 +10,12 @@
   "author": "Brad Ware",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KLI-Basecamp/kelso-prototype.git"
+    "url": "git+https://github.com/bradware/kelso.git"
   },
   "bugs": {
-    "url": "https://github.com/KLI-Basecamp/kelso-prototype/issues"
+    "url": "https://github.com/bradware/kelso/issues"
   },
-  "homepage": "https://github.com/KLI-Basecamp/kelso-prototype#readme",
+  "homepage": "https://github.com/bradware/kelso#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "bower": "^1.8.0",
