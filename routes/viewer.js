@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 var middleware = require('middleware');
 var Viewer = require('models/viewer');
-var Content = require('models/Content');
+var Content = require('models/content');
 
 router.get('/viewer', middleware.isLoggedIn, function(req, res, next) {
   Viewer.findById(req.session.viewerID, function (err, viewer) {

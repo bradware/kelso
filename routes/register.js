@@ -5,7 +5,7 @@ require('rootpath')();
 var express = require('express');
 var router = express.Router();
 var middleware = require('middleware');
-var Viewer = require('models/Viewer');
+var Viewer = require('models/viewer');
 
 router.use('/register', function(req, res, next) {
   if (req.body.name && req.body.age && req.body.gender && req.body.email && req.body.password) {
