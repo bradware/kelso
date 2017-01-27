@@ -10,6 +10,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var forceSSL = require('force-ssl-heroku');
 var MongoStore = require('connect-mongo')(session);
 
 // Required routes
@@ -40,6 +41,7 @@ db.on('error', function(err) {
 
 // Middleware setup
 app.use(logger('dev'));
+app.use(forceSSL);
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
