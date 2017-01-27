@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "bower cache clean && bower install && seed"
+    "postinstall": "bower cache clean && bower install && npm install -g node-mongo-seeds && seed"
   },
   "author": "Brad Ware",
   "repository": {
@@ -27,7 +27,6 @@
     "helmet": "^3.1.0",
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
-    "node-mongo-seeds": "^2.3.0",
     "rootpath": "^0.1.2"
   }
 }
