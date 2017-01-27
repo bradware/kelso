@@ -11,8 +11,7 @@ $(document).ready(function() {
   var male = $('#male');
 
   $('input').blur(function(e) {
-    if (name.val() && email.val() && email.val().includes('@') 
-      && password.val() && handleAge(age.val())) {
+    if (name.val() && email.val() && password.val() && handleAge(age.val())) {
       submitBtn.prop('disabled', false);
       submitBtn.addClass('green');
       submitBtn.removeClass('purple');
