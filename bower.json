@@ -1,10 +1,10 @@
 {
-  "name": "Kelso",
+  "name": "Kelso-Prototype",
   "homepage": "https://ancient-beach-62300.herokuapp.com",
   "authors": [
     "Brad Ware bwarenohs@gmail.com"
   ],
-  "description": "Kelso web app for Kenzie Lane",
+  "description": "Kelso prototype web app for Kenzie Lane",
   "main": "server.js",
   "private": true,
   "ignore": [

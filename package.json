@@ -1,7 +1,7 @@
 {
-  "name": "Kelso",
+  "name": "Kelso-Prototype",
   "version": "1.0.0",
-  "description": "Kelso web app for Kenzie Lane",
+  "description": "Kelso prototype web app for Kenzie Lane",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

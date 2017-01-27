@@ -21,7 +21,6 @@ $(document).ready(function() {
     }
   }); 
   
-  // click touchend
   $(document).on('click', '.tile', function(e) {
     var contentID = $(e.target).closest('.tile')[0].id;
     if (watchMap[contentID]) {
@@ -33,7 +32,6 @@ $(document).ready(function() {
     }
   });
 
-  // click touchend
   $('#submit-btn').on('click', function() {
     var contentArr = [];
     for (var contentID in watchMap) {

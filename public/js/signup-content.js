@@ -28,7 +28,6 @@ $(document).ready(function() {
     }
   }); 
   
-  // click touchend
   $(document).on('click', '.tile', function(e) {
     var $this = $(e.target).closest('.tile')[0];
     if (!currTile) {
@@ -46,7 +45,6 @@ $(document).ready(function() {
     updateSubmitBtn();
   });
 
-  // click touchend
   $(document).on('click', 'html', function(e) {
     if ($(e.target).hasClass('tile') || $(e.target).parents('.tile').length > 0 || 
         $(e.target).parents('#tooltip').length > 0) {
@@ -60,7 +58,6 @@ $(document).ready(function() {
     updateSubmitBtn();
   });
 
-  // click touchend
   $('#submit-btn').on('click', function() {
     for (var contentID in contentViewerMap) {
       var currContent = contentMap[contentID];
