@@ -56,11 +56,6 @@ var sess = {
   store: new MongoStore({mongooseConnection: db}),
   cookie: {maxAge: 3600000} // 60 minute expiration for session
 };
-/**
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true // serve secure cookies
-}*/
 app.use(session(sess));
 
 // UI routes
