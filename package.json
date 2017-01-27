@@ -1,14 +1,14 @@
 {
-	"name": "Kelso",
-	"version": "1.0.0",
-	"description": "Kelso web app for Kenzie Lane",
-	"main": "server.js",
-	"scripts": {
+  "name": "Kelso",
+  "version": "1.0.0",
+  "description": "Kelso web app for Kenzie Lane",
+  "main": "server.js",
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "bower cache clean && bower install"
   },
-	"author": "Brad Ware",
-	"repository": {
+  "author": "Brad Ware",
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/KLI-Basecamp/kelso-prototype.git"
   },
@@ -16,17 +16,18 @@
     "url": "https://github.com/KLI-Basecamp/kelso-prototype/issues"
   },
   "homepage": "https://github.com/KLI-Basecamp/kelso-prototype#readme",
-	"dependencies": {
-		"bcrypt": "^1.0.1",
-		"body-parser": "^1.15.2",
-		"connect-mongo": "^1.3.2",
-		"cookie-parser": "^1.4.3",
-		"cors": "^2.8.1",
-		"express": "^4.14.0",
-		"express-session": "^1.14.2",
-		"helmet": "^3.1.0",
-		"mongoose": "^4.7.2",
-		"morgan": "^1.7.0",
-		"rootpath": "^0.1.2"
-	}
+  "dependencies": {
+    "bcrypt": "^1.0.1",
+    "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "helmet": "^3.1.0",
+    "mongoose": "^4.7.2",
+    "morgan": "^1.7.0",
+    "rootpath": "^0.1.2"
+  }
 }
