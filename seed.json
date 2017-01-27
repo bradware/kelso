@@ -1,4 +1,4 @@
 {
-  "production": "localhost/kelso",
+  "production": "mongodb://heroku_2ggcz1z3:j2659ishmgbh3o19881abi5kdo@ds133279.mlab.com:33279/heroku_2ggcz1z3",
   "undefined": "localhost/kelso"
 }
