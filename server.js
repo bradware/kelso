@@ -29,7 +29,8 @@ var app = express();
 
 // MongoDB setup
 var mongodb_local_uri = 'mongodb://localhost:27017/kelso';
-mongoose.connect(mongodb_local_uri);
+var mongodb_uri = process.env.MONGODB_URI || mongodb_local_uri;
+mongoose.connect(mongodb_uri);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
