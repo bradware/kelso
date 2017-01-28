@@ -30,7 +30,7 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.x-icon', function(e) {
-    $(this)[0].parentElement.remove();
+    $(this)[0].closest('.member').remove();
     validateDom();
   });
 });
@@ -38,7 +38,7 @@ $(document).ready(function() {
 function getMemberComponent() {
   var content = 
     '<div class="member">' +
-      '<i class="fa fa-times x-icon"></i>' +
+      '<a href="#"><i class="fa fa-times x-icon"></i></a>' +
       '<form>' +
         '<div class="form-group">' +
           '<label for="name">name</label>' +

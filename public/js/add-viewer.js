@@ -46,8 +46,9 @@ $(document).ready(function() {
   });
 
   $(document).on('click', '.remove-other-viewer', function(e) {
-    $(this)[0].parentElement.remove();
-    var email = $(this)[0].parentElement.id;
+    var viewer = $(this)[0].closest('.other-viewer');
+    viewer.remove();
+    var email = viewer.id;
     for (let i = 0; i < otherViewers.length; i++) {
       if (otherViewers[i].email === email) {
         otherViewers.splice(i, 1);
@@ -66,7 +67,7 @@ function renderOtherViewerComponent(otherViewer) {
   var content =
     '<div class="other-viewer col-xs-6" id="' + otherViewer.email + '">' +
       '<h4 class="other-viewer-title">' + otherViewer.name + '</h4>' +
-      '<i class="fa fa-times x-icon remove-other-viewer"></i>' +
+      '<a href="#"><i class="fa fa-times x-icon remove-other-viewer"></i></a>' +
     '</div>';
   return content;
 }

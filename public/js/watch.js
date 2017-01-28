@@ -174,20 +174,24 @@ function renderContentResults(arr) {
 
 function renderContentResult(res) {
   var content =
-    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
-      '<div class="tile-content">' +
-        '<h4>' + res.title +'</h4>' +
+    '<a href="#">' +
+      '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
+        '<div class="tile-content">' +
+          '<h4>' + res.title +'</h4>' +
+        '</div>' +
       '</div>' +
-    '</div>';
+    '</a>';
   return content;
 }
 
 function getWatchModal() {
   var content =
-    '<div id="watch-modal" class="text-center">' +
-      '<h4></h4>' +
-      '<button id="cancel-btn" type="button" class="btn purple-font modal-btn ">nah</button>' +
-      '<button id="watch-btn" type="button" class="btn green-font modal-btn ">yeah</button>' +
-    '</div>';
+    '<a href="#">' +
+      '<div id="watch-modal" class="text-center">' +
+        '<h4></h4>' +
+        '<button id="cancel-btn" type="button" class="btn purple-font modal-btn ">nah</button>' +
+        '<button id="watch-btn" type="button" class="btn green-font modal-btn ">yeah</button>' +
+      '</div>' +
+    '</a>';
   return content;
 }

@@ -166,9 +166,9 @@ function saveContentViewers(contentID, viewerIDs) {
 }
 
 function getTooltip(arr) {
-  var start = '<div id="tooltip"><h4 class="text-center">Who?</h4>';
+  var start = '<a href="#"><div id="tooltip"><h4 class="text-center">Who?</h4>';
   var middle = '';
-  var end = '</div>';
+  var end = '</div></a>';
   for (let i = 0; i < arr.length; i++) {
     middle += renderTooltipContent(arr[i]);
   }
@@ -205,12 +205,14 @@ function getContentResults(arr) {
 
 function renderContentResult(res) {
   var content =
-    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
-      '<div class="tile-content">' +
-        '<h4>' + res.title +'</h4>' +
-        '<p class="light-font"></p>' +
+    '<a href="#">' +
+      '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
+        '<div class="tile-content">' +
+          '<h4>' + res.title +'</h4>' +
+          '<p class="light-font"></p>' +
+        '</div>' +
       '</div>' +
-    '</div>';
+    '</a>';
   return content;
 }
 

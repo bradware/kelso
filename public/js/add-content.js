@@ -113,12 +113,14 @@ function getContentResults(arr) {
 
 function renderContentResult(res) {
   var content =
-    '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
-      '<div class="tile-content">' +
-        '<h4>' + res.title +'</h4>' +
-        '<p class="light-font"></p>' +
+    '<a href="#">' + 
+      '<div class="col-xs-6 text-center tile medium-gray" id="' + res._id + '">' +
+        '<div class="tile-content">' +
+          '<h4>' + res.title +'</h4>' +
+          '<p class="light-font"></p>' +
+        '</div>' +
       '</div>' +
-    '</div>';
+    '</a>';
   return content;
 }
 
