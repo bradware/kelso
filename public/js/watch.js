@@ -78,7 +78,9 @@ function getContentTiles() {
     .done(function(res) {
       setGlobals(res);
       renderContentResults(viewer.content);
-      renderNames();
+      if (!renderNames()) {
+        changeTitleSubtext();
+      }
       $('#content-results').css('background-color', '#1D1F29');
       $('body').prepend(getWatchModal());
       $('#watch-modal').hide();
@@ -86,6 +88,10 @@ function getContentTiles() {
     .fail(function(error) {
       console.log(error);
     });
+}
+
+function changeTitleSubtext() {
+  $('.page-title').children('p')[0].innerHTML = 'Select one of your favorites below.'
 }
 
 function setGlobals(res) {
@@ -148,10 +154,13 @@ function findIntersectionOtherViewers(currContent, otherViewersChecked) {
 }
 
 function renderNames() {
+  var propFound = false;
   for (var id in otherViewers) {
     var nameComponent = renderNameComponent(otherViewers[id]);
     $('#viewers').append(nameComponent);
+    propFound = true;
   }
+  return propFound;
 }
 
 function renderNameComponent(otherViewer) {
