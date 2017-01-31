@@ -1,5 +1,5 @@
 # Kelso
-Mobile web application for consuming media content with friends and family. Deployed at [tbd](//tbd)
+Mobile web application for consuming media content with friends and family. Deployed at [kelso.bradware.com](//kelso.bradware.com)
 
 ## Technologies
 * [Node.js](//nodejs.org/en)
