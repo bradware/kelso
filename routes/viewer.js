@@ -142,15 +142,16 @@ router.get('/viewers', middleware.isLoggedIn, function(req, res, next) {
 function updateOtherViewersArray(viewer, viewerSmall) {
   var found = false;
   for (var i = 0; i < viewer.other_viewers.length; i++) {
-    if (viewer.other_viewers[i].email === viewerSmall.email) {
-        found = true;
-        break;
+    if (viewer.other_viewers[i].email.toLowerCase() === viewerSmall.email.toLowerCase()) {
+      found = true;
+      break;
     }
   }
   return !found;
 }
 
 function otherViewerExists(obj, viewerSmall, callback) {
+  obj.email = obj.email.toLowerCase();
   Viewer.findOne({'email': obj.email}, function(err, viewer) {
     if (err) {
       console.log(err);
@@ -181,14 +182,14 @@ function createViewerSmall(viewer) {
   var otherViewer = {};
   otherViewer._id = viewer._id;
   otherViewer.name = viewer.name;
-  otherViewer.email = viewer.email;
+  otherViewer.email = viewer.email.toLowerCase();
   return otherViewer;
 }
 
 function createNewViewer(obj, viewerSmall) {
   var newViewer = new Viewer();
   newViewer.name = obj.name;
-  newViewer.email = obj.email;
+  newViewer.email = obj.email.toLowerCase();
   newViewer.other_viewers.push(viewerSmall);
   newViewer.save(function(err) {
     if (err) {

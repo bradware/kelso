@@ -18,6 +18,7 @@ router.use('/login', middleware.isLoggedOut, function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+  req.body.email = req.body.email.toLowerCase();
   Viewer.authenticate(req.body.email, req.body.password, function(error, newViewer) {
     if (error) {
       next(error);

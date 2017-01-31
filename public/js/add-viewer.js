@@ -32,11 +32,11 @@ $(document).ready(function() {
       });
     } else {
       var newOtherViewer = grabInput();
-      if (newOtherViewer) {
+      if (newOtherViewer && updateOtherViewers(newOtherViewer)) {
         otherViewers.push(newOtherViewer);
-        updateDone();
         $('#other-viewers').append(renderOtherViewerComponent(newOtherViewer));
       }
+      updateDone();
       $('input').val(''); // clear input
     }
   });
@@ -56,6 +56,17 @@ $(document).ready(function() {
     }
   });
 });
+
+function updateOtherViewers(newOtherViewer) {
+  var found = false;
+  for (let i = 0; i < otherViewers.length; i++) {
+    if (otherViewers[i].email.toLowerCase() === newOtherViewer.email.toLowerCase()) {
+      found = true;
+      break;
+    }
+  }
+  return !found;
+}
 
 function getOtherViewersComponent() {
   for (let i = 0; i < otherViewers.length; i++) {

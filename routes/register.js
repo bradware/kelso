@@ -18,6 +18,7 @@ router.use('/register', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
+  req.body.email = req.body.email.toLowerCase();
   Viewer.findOne({'email': req.body.email}, function(err, viewer) {
     if (err) {
       next(err);

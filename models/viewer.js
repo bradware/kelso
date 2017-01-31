@@ -6,11 +6,11 @@ var ViewerSchema = mongoose.Schema({
   name: {type: String, required: true, trim: true},
   age: {type: Number},
   gender: {type: String, enum: ['MALE', 'FEMALE']},
-  email: {type: String, required: true, unique: true, trim: true},
+  email: {type: String, required: true, unique: true, trim: true, lowercase: true},
   other_viewers: [{
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Viewer'},
     name: {type: String, trim: true},
-    email: {type: String, trim: true}
+    email: {type: String, trim: true, lowercase: true}
   }],
   content: [{
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'Content'},
