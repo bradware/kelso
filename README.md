@@ -13,7 +13,7 @@ Mobile web application for consuming media content with friends and family. Depl
 
 ## Getting Started
 * download [Node.js](//nodejs.org/en/download/) or `brew install node`
-* `git clone https://github.com/KLI-Basecamp/kelso-prototype.git`
+* `git clone https://github.com/bradware/kelso.git`
 * `cd kelso-prototype`
 * `npm install`
 * `bower install`
